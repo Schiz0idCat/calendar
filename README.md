@@ -1,5 +1,5 @@
 # **Informe de Requerimientos del Sistema**
-**Proyecto:** Sistema de Gestión de Agenda y Reuniones
+**Proyecto:** Sistema de Gestión de Agenda y reuniones
 **Autores:**
 - Agustín Guzmán
 - Nicolás Leiva
