@@ -28,7 +28,7 @@ public class Event {
     }
 
     public LocalDate getDate() {
-
+        return this.date;
     }
 
     public LocalTime getStartTime() {
