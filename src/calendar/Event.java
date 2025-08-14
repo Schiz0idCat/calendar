@@ -40,7 +40,7 @@ public class Event {
     }
 
     public String getLocation() {
-
+        return this.location;
     }
 
     public String getDescription() {
