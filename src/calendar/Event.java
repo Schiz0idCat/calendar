@@ -79,8 +79,10 @@ public class Event {
         return this.getDate().format(format);
     }
 
-    public String fmtStartTime() {
+    public String fmtStartTime(String pattern) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(pattern);
 
+        return this.getStartTime().format(format);
     }
 
     public String fmtEndTime() {
