@@ -24,7 +24,7 @@ public class Event {
 
     // Getters
     public String getTitle() {
-
+        return this.title;
     }
 
     public LocalDate getDate() {
