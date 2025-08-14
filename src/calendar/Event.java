@@ -36,7 +36,7 @@ public class Event {
     }
 
     public LocalTime getEndTime() {
-
+        return this.endTime;
     }
 
     public String getLocation() {
