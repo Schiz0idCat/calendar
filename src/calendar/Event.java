@@ -32,7 +32,7 @@ public class Event {
     }
 
     public LocalTime getStartTime() {
-
+        return this.startTime;
     }
 
     public LocalTime getEndTime() {
