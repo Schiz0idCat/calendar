@@ -44,7 +44,7 @@ public class Event {
     }
 
     public String getDescription() {
-
+        return this.description;
     }
 
     // Setters
