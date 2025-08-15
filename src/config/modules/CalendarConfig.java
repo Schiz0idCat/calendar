@@ -4,6 +4,7 @@ public class CalendarConfig {
     private String dateFormat;
     private String timeFormat;
 
+    // Getters
     public String getDateFormat() {
         return dateFormat;
     }
