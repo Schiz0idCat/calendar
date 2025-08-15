@@ -13,8 +13,8 @@ public class Event {
     private String location;
     private String description;
 
-    String dateFormat = Config.get("calendar.dateFormat");
-    String timeFormat = Config.get("calendar.timeFormat");
+    private static final String dateFormat = Config.get("calendar.dateFormat");
+    private static final String timeFormat = Config.get("calendar.timeFormat");
 
     // Constructor
     public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, String location, String description) {
