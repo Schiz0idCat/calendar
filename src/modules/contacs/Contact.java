@@ -13,15 +13,15 @@ public class Contact {
 
     // Getters
     public String getName() {
-
+        return this.name;
     }
 
     public String getPhone() {
-
+        return this.phone;
     }
 
     public String getEmail() {
-
+        return this.email;
     }
 
     // Setters

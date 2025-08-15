@@ -15,15 +15,15 @@ public class EventsCalendar {
 
     }
 
-    public boolean remove(Event event) {
+    public void remove(Event event) {
 
     }
 
-    public List<Event> searchByTitle(String keyword) {
+    public void searchByTitle(String keyword) {
 
     }
 
-    public List<Event> searchByDate(java.time.LocalDate date) {
+    public void searchByDate(java.time.LocalDate date) {
 
     }
 }

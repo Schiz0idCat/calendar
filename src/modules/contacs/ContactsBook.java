@@ -18,7 +18,7 @@ public class ContactsBook {
 
     }
 
-    public Contact findByName(String name) {
+    public void findByName(String name) {
 
     }
 }

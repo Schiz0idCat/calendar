@@ -13,8 +13,7 @@ public class Event {
     private String location;
     private String description;
 
-    private static final String dateFormat = Config.get("calendar.dateFormat");
-    private static final String timeFormat = Config.get("calendar.timeFormat");
+    private static final Config config = new Config();
 
     // Constructor
     public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, String location, String description) {
@@ -98,8 +97,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event: " + this.getTitle() + "\n" +
-        "Date: " + this.fmtDate(dateFormat) + "\n" +
-        "Time: " + this.fmtStartTime(timeFormat) + " - " + this.fmtEndTime(timeFormat) + "\n" +
+        "Date: " + this.fmtDate(config.calendar.dateFormat) + "\n" +
+        "Time: " + this.fmtStartTime(config.calendar.timeFormat) + " - " + this.fmtEndTime(config.calendar.timeFormat) + "\n" +
         "Location: " + this.getLocation() + "\n" +
         "Description: " + this.getDescription();
     }
