@@ -2,12 +2,12 @@ package ui.modules;
 
 import java.util.Scanner;
 
-public class ContactsUI {
+public class AddressBookUI {
     public static void run(Scanner scan) {
         boolean running = true;
 
         while (running) {
-            System.out.println("=====> Contacts <=====");
+            System.out.println("=====> Address Book <=====");
             System.out.println("What do you want to do?");
             System.out.println("1. List all contacts.       2. Search for a contact.");
             System.out.println("3. Add a contact.           4. Modify a contact.");

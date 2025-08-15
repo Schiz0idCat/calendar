@@ -1,12 +1,12 @@
-package modules.contacts;
+package modules.addressBook;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactsBook {
+public class AddressBook {
     private List<Contact> contacts;
 
-    public ContactsBook() {
+    public AddressBook() {
         contacts = new ArrayList<>();
     }
 

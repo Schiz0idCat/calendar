@@ -1,7 +1,7 @@
 package ui;
 
 import ui.modules.CalendarUI;
-import ui.modules.ContactsUI;
+import ui.modules.AddressBookUI;
 
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class UI {
                     CalendarUI.run(scan);
                     break;
                 case 2: // agenda de contactos
-                    ContactsUI.run(scan);
+                    AddressBookUI.run(scan);
                     break;
                 case 3: // salir de la interfaz
                     System.out.println("Goodbye.");
