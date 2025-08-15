@@ -1,5 +1,6 @@
 package calendar;
 
+import config.Config;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,9 @@ public class Event {
     private LocalTime endTime;
     private String location;
     private String description;
+
+    String dateFormat = Config.get("calendar.dateFormat");
+    String timeFormat = Config.get("calendar.timeFormat");
 
     // Constructor
     public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, String location, String description) {
@@ -94,9 +98,9 @@ public class Event {
     @Override
     public String toString() {
         return "Event: " + this.getTitle() + "\n" +
-               "Date: " + this.fmtDate() + "\n" +
-               "Time: " + this.fmtStartTime() + " - " + this.fmtEndTime() + "\n" +
-               "Location: " + this.getLocation() + "\n" +
-               "Description: " + this.getDescription();
+        "Date: " + this.fmtDate(dateFormat) + "\n" +
+        "Time: " + this.fmtStartTime(timeFormat) + " - " + this.fmtEndTime(timeFormat) + "\n" +
+        "Location: " + this.getLocation() + "\n" +
+        "Description: " + this.getDescription();
     }
 }
