@@ -9,7 +9,7 @@ import java.net.URL;
 public class Config {
     private CalendarConfig calendar;
 
-    private static String path = "settings/settings.toml";
+    private static String path = "settings.toml";
 
     public CalendarConfig getCalendar() {
         return calendar;
