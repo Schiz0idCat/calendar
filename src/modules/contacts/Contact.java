@@ -1,4 +1,4 @@
-package modules.contacs;
+package modules.contacts;
 
 public class Contact {
     private String name;

@@ -1,4 +1,4 @@
-package modules.contacs;
+package modules.contacts;
 
 import java.util.ArrayList;
 import java.util.List;
