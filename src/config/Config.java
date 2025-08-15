@@ -30,7 +30,7 @@ public class Config {
                 else if (line.contains("=")) {
                     String[] parts = line.split("=", 2); // el 2 indica el número de splits máxmimo que hará
                     String key = parts[0].trim();
-                    String value = parts[1].trim().split("#", 2)[0].replaceAll("^\"|\"$", ""); // quita las ""
+                    String value = parts[1].split("#", 2)[0].trim().replaceAll("^\"|\"$", ""); // quita las ""
 
                     // Explicación de la regex:
                     // para todo \" -> esto solo escapa el ", para no cortar el string
