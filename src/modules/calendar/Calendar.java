@@ -3,11 +3,11 @@ package modules.calendar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsCalendar {
+public class Calendar {
     private List<Event> events;
 
     // Constructor
-    public EventsCalendar() {
+    public Calendar() {
         events = new ArrayList<>();
     }
 
