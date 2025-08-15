@@ -1,4 +1,4 @@
-package calendar;
+package modules.calendar;
 
 import java.util.ArrayList;
 import java.util.List;

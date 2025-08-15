@@ -1,4 +1,4 @@
-package contacs;
+package modules.contacs;
 
 import java.util.ArrayList;
 import java.util.List;

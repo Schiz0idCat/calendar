@@ -1,4 +1,4 @@
-package calendar;
+package modules.calendar;
 
 import config.Config;
 import java.time.LocalDate;
