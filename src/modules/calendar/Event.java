@@ -12,6 +12,7 @@ public class Event {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
+    private boolean isAllDay;
     private String location;
     private String description;
 
@@ -44,6 +45,10 @@ public class Event {
         return this.endTime;
     }
 
+    public boolean getIsAllDay() {
+        return this.isAllDay;
+    }
+
     public String getLocation() {
         return this.location;
     }
@@ -66,6 +71,10 @@ public class Event {
     }
 
     public void setEndTime(LocalTime endTime) {
+
+    }
+
+    public void setIsAllDay(boolean isAllDay) {
 
     }
 

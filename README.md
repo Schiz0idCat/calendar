@@ -59,6 +59,7 @@ La aplicación permite:
     - Fecha (obligatorio) -> LocalDate
     - Hora de Inicio (obligatorio) -> LocalTime
     - Hora de Termino (obligatorio) -> LocalTime
+    - Si dura todo el día (obligatorio) -> Boolean
     - Ubicación (opcional) -> String
     - Descripción (opcional) -> String
 - [ ] **RF-21:** Debe haber un constructor que respete lo anterior.
