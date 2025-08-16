@@ -56,7 +56,7 @@ public class Recurrence {
         return "Frequency = " + this.getFrequency() + "\n" +
                 "Interval = " + this.getInterval() + "\n" +
                 "Until = " + this.getUntil() + "\n" +
-                "ByDay = " + this.getUntil();
+                "ByDay = " + this.getByDay();
     }
 
     public enum Frequency {
