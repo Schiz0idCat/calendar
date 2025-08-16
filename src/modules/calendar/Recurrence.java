@@ -1,6 +1,10 @@
 package modules.calendar;
 
+import config.Config;
+import config.modules.CalendarConfig;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.DayOfWeek;
 import java.util.Set;
 
@@ -9,6 +13,8 @@ public class Recurrence {
     private int interval;           // cada cuanto {frecuencia}, se repite el evento (p.e. cada 3 meses)
     private LocalDate until;        // la fecha cuando termina la repetición
     private Set<DayOfWeek> byDay;   // los días de la semana en los que aparece el evento
+
+    private static final CalendarConfig config = Config.load().getCalendar();
 
     public Recurrence(Frequency frequency, int interval, LocalDate until, Set<DayOfWeek> byDay) {
         this.setFrequency(frequency);
@@ -51,12 +57,22 @@ public class Recurrence {
         this.byDay = byDay;
     }
 
+    // Formatters
+    public String fmtFrequency() {
+        return this.frequency.toString().toLowerCase();
+    }
+
+    public String fmtUntil(String format) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        return this.until.format(formatter);
+    }
+
     @Override
     public String toString() {
-        return "Frequency = " + this.getFrequency() + "\n" +
-                "Interval = " + this.getInterval() + "\n" +
-                "Until = " + this.getUntil() + "\n" +
-                "ByDay = " + this.getByDay();
+        return "Frequency = " + this.fmtFrequency() + "\n" +
+        "Interval = " + this.getInterval() + "\n" +
+        "Until = " + this.fmtUntil(config.getDateFormat()) + "\n" +
+        "ByDay = " + this.getByDay();
     }
 
     public enum Frequency {
