@@ -45,15 +45,15 @@ La aplicación permite:
 - [x] **RF-11:** La clase debe poder ser printeable.
 
 #### **3.1.2 Clase Event**
-- [ ] **RF-12:** El evento está definido por:
-    - [ ] Título (obligatorio) -> String
-    - [ ] Fecha (obligatorio) -> LocalDate
-    - [ ] Hora de Inicio (obligatorio) -> LocalTime
-    - [ ] Hora de Termino (obligatorio) -> LocalTime
-    - [ ] Si dura todo el día (obligatorio) -> Boolean
-    - [ ] Recurrencia (obligatorio) -> Recurrence
-    - [ ] Ubicación (opcional) -> String
-    - [ ] Descripción (opcional) -> String
+- [x] **RF-12:** El evento está definido por:
+    - [x] Título (obligatorio) -> String
+    - [x] Fecha (obligatorio) -> LocalDate
+    - [x] Hora de Inicio (obligatorio) -> LocalTime
+    - [x] Hora de Termino (obligatorio) -> LocalTime
+    - [x] Si dura todo el día (obligatorio) -> Boolean
+    - [x] Recurrencia (obligatorio) -> Recurrence
+    - [x] Ubicación (opcional) -> String
+    - [x] Descripción (opcional) -> String
 - [ ] **RF-13:** Debe haber un constructor que respete lo anterior.
 - [x] **RF-14:** Todos los campos deben ser privados.
 - [x] **RF-15:** Todos los campos deben ser accedidos por getters
