@@ -3,7 +3,7 @@ package ui.modules;
 import java.util.Scanner;
 
 public class CalendarUI {
-    public static void run(Scanner scan) {
+    public void run(Scanner scan) {
         boolean running = true;
 
         while (running) {
@@ -26,24 +26,19 @@ public class CalendarUI {
 
             switch (option) {
                 case 1: // mostrar todos los eventos
-                    System.out.println("Listing all events...");
-                    // código
+                    this.listAllEvents();
                     break;
                 case 2: // mostrar un solo evento
-                    System.out.println("Search by...");
-                    // código
+                    this.listOneEvent();
                     break;
                 case 3: // ingresar un nuevo evento
-                    System.out.println("Enter the new event...");
-                    // código
+                    this.enterNewEvent();
                     break;
                 case 4: // modificar un evento
-                    System.out.println("Find the event you want to modify...");
-                    // código
+                    this.modifyEvent();
                     break;
                 case 5: // eliminar un evento
-                    System.out.println("Search by...");
-                    // código
+                    this.deleteEvent();
                     break;
                 case 6: // salir de la interfaz
                     System.out.println("Exiting...");
@@ -53,5 +48,25 @@ public class CalendarUI {
                     System.out.println("Invalid option, try again.");
             }
         }
+    }
+
+    private void listAllEvents() {
+        System.out.println("Listing all events...");
+    }
+
+    private void listOneEvent() {
+        System.out.println("Listing one event...");
+    }
+
+    private void enterNewEvent() {
+        System.out.println("Enter the new event...");
+    }
+
+    private void modifyEvent() {
+        System.out.println("Search for the event you want to modify...");
+    }
+
+    private void deleteEvent() {
+        System.out.println("Search for the event you want to delete...");
     }
 }
