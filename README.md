@@ -27,7 +27,7 @@ La aplicación permite:
 - [ ] **RF-17:** Modificar un evento existente.
 - [ ] **RF-18:** Eliminar un evento.
 - [ ] **RF-19:** Buscar y filtrar evento por sus campos.
-- [ ] **RF-19:** Todo esto debe ser gestionado con un archivo .csv.
+- [ ] **RF-19:** Todo esto debe ser gestionado con un archivo .*{inserte extesión}*. (solo si hay tiempo).
 
 #### **3.1.1 Clase Recurrence**
 - [ ] **RF-00:** La recurrencia está definida por:
@@ -67,8 +67,8 @@ La aplicación permite:
 - [ ] **RF-31:** Se debe poder filtrar un evento según la fecha (retornar todas las coincidencias).
 
 ### **3.2 Interfaz Gráfica**
-- [ ] **RF-33:** Debe permitir mostrar CalendarUI.
-- [ ] **RF-34:** Debe permitir salir de la interfaz.
+- [x] **RF-33:** Debe permitir mostrar CalendarUI.
+- [x] **RF-34:** Debe permitir salir de la interfaz.
 
 #### **3.2.1 Clase CalendarUI**
 - [ ] **RF-41:** Debe permitir listar todos los eventos.
@@ -76,4 +76,4 @@ La aplicación permite:
 - [ ] **RF-43:** Debe permitir añadir un evento.
 - [ ] **RF-44:** Debe permitir modificar los campos de un evento existente.
 - [ ] **RF-45:** Debe permitir eliminar un evento (esto lo borraría de la memoria).
-- [ ] **RF-46:** Debe permitir salir de la interfaz.
+- [x] **RF-46:** Debe permitir salir de la interfaz.
