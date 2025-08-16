@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class UI {
     public static void run() {
         Scanner scan = new Scanner(System.in);
+        CalendarUI calendarUI = new CalendarUI();
         boolean running = true;
 
         while (running) {
@@ -28,7 +29,7 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                    CalendarUI.run(scan);
+                    calendarUI.run(scan);
                     break;
                 case 2: // salir de la interfaz
                     System.out.println("Goodbye.");
