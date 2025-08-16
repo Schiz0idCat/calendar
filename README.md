@@ -9,7 +9,7 @@
 ---
 
 ## **1 Introducción**
-Life Organizer es una applicación para gestionar tu agenda. Pensada para ordenar tu vida.
+Calendar es una applicación para gestionar tu agenda. Pensada para ordenar tu vida.
 
 ---
 
