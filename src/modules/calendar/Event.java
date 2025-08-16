@@ -50,6 +50,10 @@ public class Event {
         return this.isAllDay;
     }
 
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
+
     public String getLocation() {
         return this.location;
     }
@@ -76,6 +80,10 @@ public class Event {
     }
 
     public void setIsAllDay(boolean isAllDay) {
+
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
 
     }
 
