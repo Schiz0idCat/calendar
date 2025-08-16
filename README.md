@@ -67,7 +67,6 @@ La aplicación permite:
 - [ ] **RF-31:** Se debe poder filtrar un evento según la fecha (retornar todas las coincidencias).
 
 ### **3.2 Interfaz Gráfica**
-- [ ] **RF-32:** Debe permitir mostrar AddressBookUI.
 - [ ] **RF-33:** Debe permitir mostrar CalendarUI.
 - [ ] **RF-34:** Debe permitir salir de la interfaz.
 
