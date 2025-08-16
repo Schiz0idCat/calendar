@@ -1,7 +1,6 @@
 package ui;
 
 import ui.modules.CalendarUI;
-import ui.modules.AddressBookUI;
 
 import java.util.Scanner;
 
@@ -14,8 +13,7 @@ public class UI {
             System.out.println("=====> Main Menu <=====");
             System.out.println("What do you want to do?");
             System.out.println("1. Calendar.");
-            System.out.println("2. Contacts.");
-            System.out.println("3. Exit.");
+            System.out.println("2. Exit.");
             System.out.print("Select an option: ");
 
             int option;
@@ -32,10 +30,7 @@ public class UI {
                 case 1: // calendario
                     CalendarUI.run(scan);
                     break;
-                case 2: // agenda de contactos
-                    AddressBookUI.run(scan);
-                    break;
-                case 3: // salir de la interfaz
+                case 2: // salir de la interfaz
                     System.out.println("Goodbye.");
                     running = false;
                     break;

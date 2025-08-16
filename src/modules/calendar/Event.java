@@ -13,6 +13,7 @@ public class Event {
     private LocalTime startTime;
     private LocalTime endTime;
     private boolean isAllDay;
+    private Recurrence recurrence;
     private String location;
     private String description;
 
