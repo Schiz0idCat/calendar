@@ -2,9 +2,9 @@
 **Proyecto:** Calendar.
 **Descripción:** Aplicación para gestionar eventos y reuniones.
 **Autores:**
-- Agustín Guzmán.
-- Nicolás Leiva.
-- Felipe Marques.
+    - Agustín Guzmán.
+    - Nicolás Leiva.
+    - Felipe Marques.
 
 ---
 
