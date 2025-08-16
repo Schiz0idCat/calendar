@@ -38,7 +38,7 @@ La aplicación permite:
 - [ ] **RF-21:** Debe haber un constructor que respete lo anterior.
 - [x] **RF-22:** Todos los campos deben ser privados.
 - [x] **RF-23:** Todos los campos deben ser accedidos por getters
-- [ ] **RF-24:** Todos los campos deben ser modificados con setters.
+- [x] **RF-24:** Todos los campos deben ser modificados con setters.
 - [x] **RF-25:** Todos los campos deben poder ser printeables.
 - [x] **RF-26:** La clase debe poder ser printeable.
 
