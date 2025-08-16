@@ -3,14 +3,19 @@ package config.modules;
 public class CalendarConfig {
     private String dateFormat;
     private String timeFormat;
+    private String weekStart;
 
     // Getters
     public String getDateFormat() {
-        return dateFormat;
+        return this.dateFormat;
     }
 
     public String getTimeFormat() {
-        return timeFormat;
+        return this.timeFormat;
+    }
+
+    public String getWeekStart() {
+        return this.weekStart;
     }
 
     // Formatter
@@ -18,6 +23,7 @@ public class CalendarConfig {
     public String toString() {
         return "[calendar]" + "\n" +
         "dateFormat = \"" + this.getDateFormat() + "\"" + "\n" +
-        "timeFormat = \"" + this.getTimeFormat() + "\"";
+        "timeFormat = \"" + this.getTimeFormat() + "\"" + "\n" +
+        "weekStart = \"" + this.getWeekStart() + "\"";
     }
 }
