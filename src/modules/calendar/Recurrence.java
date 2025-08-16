@@ -53,10 +53,10 @@ public class Recurrence {
 
     @Override
     public String toString() {
-        return "Frequency = " + frequency + "\n" +
-                "Interval = " + interval + "\n" +
-                "Until = " + until + "\n" +
-                "ByDay = " + byDay;
+        return "Frequency = " + this.getFrequency() + "\n" +
+                "Interval = " + this.getInterval() + "\n" +
+                "Until = " + this.getUntil() + "\n" +
+                "ByDay = " + this.getUntil();
     }
 
     public enum Frequency {
