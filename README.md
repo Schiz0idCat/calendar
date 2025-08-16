@@ -37,10 +37,10 @@ La aplicación permite:
     - [x] Intervalo (obligatorio) -> int
     - [x] Fecha de termino (obligatorio) -> LocalDate
     - [x] Dias de la semana (obligatorio) -> Set<DayOfWeek>
-- [x] **RF-6:** Debe haber un constructor que respete lo anterior.
-- [x] **RF-7:** Todos los campos deben ser privados.
-- [x] **RF-8:** Todos los campos deben ser accedidos por getters
-- [x] **RF-9:** Todos los campos deben ser modificados con setters.
+- [x] **RF-06:** Debe haber un constructor que respete lo anterior.
+- [x] **RF-07:** Todos los campos deben ser privados.
+- [x] **RF-08:** Todos los campos deben ser accedidos por getters
+- [x] **RF-09:** Todos los campos deben ser modificados con setters.
 - [x] **RF-10:** Todos los campos deben poder ser printeables.
 - [x] **RF-11:** La clase debe poder ser printeable.
 
