@@ -54,10 +54,10 @@ La aplicación permite:
     - [x] Recurrencia (obligatorio) -> Recurrence
     - [x] Ubicación (opcional) -> String
     - [x] Descripción (opcional) -> String
-- [ ] **RF-13:** Debe haber un constructor que respete lo anterior.
+- [x] **RF-13:** Debe haber un constructor que respete lo anterior.
 - [x] **RF-14:** Todos los campos deben ser privados.
 - [x] **RF-15:** Todos los campos deben ser accedidos por getters
-- [ ] **RF-16:** Todos los campos deben ser modificados con setters.
+- [x] **RF-16:** Todos los campos deben ser modificados con setters.
 - [x] **RF-17:** Todos los campos deben poder ser printeables.
 - [x] **RF-18:** La clase debe poder ser printeable.
 
