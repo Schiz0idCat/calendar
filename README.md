@@ -15,7 +15,7 @@ Calendar es una applicación para gestionar tu agenda. Pensada para ordenar tu v
 
 ---
 
-### **2 Alcance**
+## **2 Alcance**
 La aplicación permite:
 - Programar, modificar y eliminar reuniones/eventos.
 - Comunicarse con la aplicación mediante interfaz de terminal.
