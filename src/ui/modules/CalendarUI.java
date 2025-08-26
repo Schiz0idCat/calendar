@@ -94,23 +94,27 @@ public class CalendarUI {
 
             switch (option) {
                 case 1: // buscar eventos por nombre
-                List<Event> resultName = this.searchEventsByName();
-                for(Event e : resultName) {
-                    System.out.println(e.toString());
-                }
-                break;
+                    List<Event> resultName = this.searchEventsByName();
+
+                    for(Event e : resultName) {
+                        System.out.println(e.toString());
+                    }
+
+                    break;
                 case 2: // buscar eventos por fecha
-                List<Event> resultDate = this.searchEventsByDate();
-                for(Event e : resultDate) {
-                    System.out.println(e.toString());
-                }
-                break;
+                    List<Event> resultDate = this.searchEventsByDate();
+
+                    for(Event e : resultDate) {
+                        System.out.println(e.toString());
+                    }
+
+                    break;
                 case 6: // salir de la interfaz
-                System.out.println("Exiting...");
-                running = false;
-                break;
+                    System.out.println("Exiting...");
+                    running = false;
+                    break;
                 default:
-                System.out.println("Invalid option, try again.");
+                    System.out.println("Invalid option, try again.");
             }
         }
     }
