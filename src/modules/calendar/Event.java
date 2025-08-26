@@ -22,6 +22,16 @@ public class Event {
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59);
 
     // Constructor
+    public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isAllDay, String location, String description) {
+        this.setTitle(title);
+        this.setDate(date);
+        this.setStartTime(startTime);
+        this.setEndTime(endTime);
+        this.setIsAllDay(isAllDay);
+        this.setLocation(location);
+        this.setDescription(description);
+    }
+
     public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, String location, String description) {
         this.setTitle(title);
         this.setDate(date);
