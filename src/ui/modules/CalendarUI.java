@@ -1,9 +1,10 @@
 package ui.modules;
 
 import java.util.Scanner;
+import modules.calendar.Calendar;
 
 public class CalendarUI {
-    public void run(Scanner scan) {
+    public void run(Scanner scan, Calendar calendar) {
         boolean running = true;
 
         while (running) {

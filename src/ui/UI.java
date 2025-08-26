@@ -1,11 +1,12 @@
 package ui;
 
 import ui.modules.CalendarUI;
+import modules.calendar.Calendar;
 
 import java.util.Scanner;
 
 public class UI {
-    public static void run() {
+    public static void run(Calendar calendar) {
         Scanner scan = new Scanner(System.in);
         CalendarUI calendarUI = new CalendarUI();
         boolean running = true;
@@ -29,7 +30,7 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                    calendarUI.run(scan);
+                    calendarUI.run(scan, calendar);
                     break;
                 case 2: // salir de la interfaz
                     System.out.println("Goodbye.");
