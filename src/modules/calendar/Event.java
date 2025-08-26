@@ -30,6 +30,14 @@ public class Event {
         this.setDescription(description);
     }
 
+    public Event(String title, LocalDate date, boolean isAllDay, String location, String description) {
+        this.setTitle(title);
+        this.setDate(date);
+        this.setIsAllDay(isAllDay);
+        this.setLocation(location);
+        this.setDescription(description);
+    }
+
     // Getters
     public String getTitle() {
         return this.title;
