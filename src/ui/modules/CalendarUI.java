@@ -2,17 +2,25 @@ package ui.modules;
 
 import config.Config;
 import config.modules.CalendarConfig;
+import modules.calendar.Calendar;
+import modules.calendar.Event;
 
 import java.util.Scanner;
-import modules.calendar.Calendar;
+import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class CalendarUI {
     private Calendar calendar;
+    private Scanner scan;
 
     private static final CalendarConfig config = Config.load().getCalendar();
 
     public void run(Scanner scan, Calendar calendar) {
         this.calendar = calendar;
+        this.scan = scan;
 
         boolean running = true;
 
@@ -66,60 +74,69 @@ public class CalendarUI {
     }
 
     private void searchEvents() {
-        System.out.println("How do you want to search?");
-        System.out.println("1. Event Name.");
-        System.out.println("2. Event Date.");
-        int option;
+        boolean running = true;
 
-        try {
-            option = Integer.parseInt(scan.nextLine());
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Please, enter a valid number.");
-            continue;
-        }
+        while (running) {
+            System.out.println("How do you want to search?");
+            System.out.println("1. Event Name.");
+            System.out.println("2. Event Date.");
+            System.out.println("3. Exit.");
+            System.out.print("Select an option: ");
+            int option;
 
-        switch (option) {
-            case 1: // buscar eventos por nombre
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                continue;
+            }
+
+            switch (option) {
+                case 1: // buscar eventos por nombre
                 List<Event> resultName = this.searchEventsByName();
                 for(Event e : resultName) {
                     System.out.println(e.toString());
                 }
                 break;
-            case 2: // buscar eventos por fecha
+                case 2: // buscar eventos por fecha
                 List<Event> resultDate = this.searchEventsByDate();
                 for(Event e : resultDate) {
                     System.out.println(e.toString());
                 }
                 break;
+                case 6: // salir de la interfaz
+                System.out.println("Exiting...");
+                running = false;
+                break;
+                default:
+                System.out.println("Invalid option, try again.");
+            }
         }
     }
 
     private List<Event> searchEventsByName() {
-        List<Event> result = new ArrayList<>();
         System.out.println("Please, enter a keyword");
-        String keyword;
 
-        keyword = scan.nextLine();
+        String keyword = scan.nextLine();
+        List<Event> result = calendar.searchByTitle(keyword);
 
-        result = calendar.searchByTitle(keyword);
-        
         return result;
     }
 
-    private void searchEventsByDate() {
+    private List<Event> searchEventsByDate() {
         List<Event> result = new ArrayList<>();
         System.out.println("Please, enter a date");
         String strDate;
 
         strDate = scan.nextLine();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(config.getDateFormat());
 
         try {
             LocalDate date = LocalDate.parse(strDate, formatter);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date: " + e.getMessage());
+            System.out.println("Invalid date. The format is: " + config.getDateFormat());
         }
 
         result = calendar.searchByDate(date);
