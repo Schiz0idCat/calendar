@@ -52,7 +52,8 @@ public class CalendarUI {
     }
 
     private void listAllEvents() {
-        System.out.println("Listing all events...");
+        System.out.println("Listing all events:");
+        System.out.println(calendar.toString());
     }
 
     private void listOneEvent() {
