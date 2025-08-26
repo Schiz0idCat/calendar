@@ -4,7 +4,11 @@ import java.util.Scanner;
 import modules.calendar.Calendar;
 
 public class CalendarUI {
+    private Calendar calendar;
+
     public void run(Scanner scan, Calendar calendar) {
+        this.calendar = calendar;
+
         boolean running = true;
 
         while (running) {
