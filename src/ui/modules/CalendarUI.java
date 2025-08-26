@@ -130,16 +130,18 @@ public class CalendarUI {
         String strDate;
 
         strDate = scan.nextLine();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(config.getDateFormat());
+        LocalDate date = null;
 
         try {
-            LocalDate date = LocalDate.parse(strDate, formatter);
+            date = LocalDate.parse(strDate, formatter);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid date. The format is: " + config.getDateFormat());
         }
 
-        result = calendar.searchByDate(date);
+        if (date != null) {
+            result = calendar.searchByDate(date);
+        }
         
         return result;
     }
