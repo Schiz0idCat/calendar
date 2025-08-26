@@ -3,6 +3,7 @@ package modules.calendar;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Calendar {
     private final List<Event> events;
