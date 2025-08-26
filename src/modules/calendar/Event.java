@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event {
+    private int id;
     private String title;
     private LocalDate date;
     private LocalTime startTime;
@@ -39,6 +40,10 @@ public class Event {
     }
 
     // Getters
+    public int getId() {
+        return this.id;
+    }
+
     public String getTitle() {
         return this.title;
     }
