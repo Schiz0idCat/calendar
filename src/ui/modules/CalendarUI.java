@@ -1,10 +1,15 @@
 package ui.modules;
 
+import config.Config;
+import config.modules.CalendarConfig;
+
 import java.util.Scanner;
 import modules.calendar.Calendar;
 
 public class CalendarUI {
     private Calendar calendar;
+
+    private static final CalendarConfig config = Config.load().getCalendar();
 
     public void run(Scanner scan, Calendar calendar) {
         this.calendar = calendar;
