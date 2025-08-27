@@ -252,35 +252,50 @@ public class CalendarUI {
         return null;
     }
 
-    private Event selectedEvent(List<Event> events) {
+    private Event selectAnEvent(List<Event> events) {
         if (events.isEmpty()) {
             System.out.println("No events found.");
             return null;
         }
 
-        System.out.println("Select an event by its number:");
-
-        for (int i = 0; i < events.size(); i++) {
-            System.out.println((i + 1) + ". " + events.get(i).toString());
-        }
-
-        System.out.print("Enter the number of the event: ");
+        boolean running = true;
         int selection;
+        Event selectedEvent = null;
 
-        try {
-            selection = Integer.parseInt(scan.nextLine());
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Please, enter a valid number.");
-            return null;
+        while (running) {
+            System.out.println("Select an event by its number:");
+
+            int option = 0;
+            for (Event e: events) {
+                System.out.println((++option + 1) + ". " + e.toString());
+            }
+
+            System.out.println(option + " Exit.");
+
+            System.out.print("Enter the number of the event: ");
+
+            try {
+                selection = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                continue;
+            }
+
+            if (selection < 1 || selection > events.size()) {
+                System.out.println("Invalid selection.");
+                continue;
+            }
+
+            if (selection == option) {
+                System.out.println("Exiting...");
+                return null;
+            }
+
+            selectedEvent = events.get(selection - 1);
         }
 
-        if (selection < 1 || selection > events.size()) {
-            System.out.println("Invalid selection.");
-            return null;
-        }
-
-        return events.get(selection - 1);
+        return selectedEvent;
     }
     
     private void enterNewEvent() {
@@ -327,7 +342,7 @@ public class CalendarUI {
             }
         }
 
-        Event eventToModify = this.selectedEvent(events);
+        Event eventToModify = this.selectAnEvent(events);
 
         if (eventToModify == null) {
             System.out.println("No Event was selected.");
@@ -374,7 +389,7 @@ public class CalendarUI {
             }
         }
 
-        Event eventToDelete = this.selectedEvent(events);
+        Event eventToDelete = this.selectAnEvent(events);
 
         if (eventToDelete == null) {
             System.out.println("No Event was selected.");
