@@ -188,6 +188,8 @@ public class CalendarUI {
                 default:
                     System.out.println("Invalid option, try again.");
             }
+
+            if (!events.isEmpty()) running = false;
         }
 
         Event eventToModify = this.selectAnEvent(events);
@@ -382,21 +384,21 @@ public class CalendarUI {
         }
 
         boolean running = true;
-        int selection;
         Event selectedEvent = null;
 
         while (running) {
             System.out.println("Select an event by its number:");
 
-            int option = 0;
+            int index = 1;
             for (Event e: events) {
-                System.out.println((++option + 1) + ". " + e.toString());
+                System.out.println((index) + ". \n" + e.toString() + "\n");
+                index++;
             }
 
-            System.out.println(option + " Exit.");
+            System.out.println(index + " Exit.");
 
             System.out.print("Enter the number of the event: ");
-
+            int selection;
             try {
                 selection = Integer.parseInt(scan.nextLine());
             }
@@ -405,17 +407,17 @@ public class CalendarUI {
                 continue;
             }
 
-            if (selection < 1 || selection > events.size()) {
+            if (selection == index) {
+                System.out.println("Exiting...");
+                return null;
+            }
+            else if (selection < 1 || selection > events.size()) {
                 System.out.println("Invalid selection.");
                 continue;
             }
 
-            if (selection == option) {
-                System.out.println("Exiting...");
-                return null;
-            }
-
             selectedEvent = events.get(selection - 1);
+            running = false;
         }
 
         return selectedEvent;
