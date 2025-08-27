@@ -62,7 +62,7 @@ public class Calendar {
             }
         }
 
-        return result;        
+        return result;
     }
 
     public List<Event> searchByDate(LocalDate date) {
