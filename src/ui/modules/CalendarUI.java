@@ -144,8 +144,12 @@ public class CalendarUI {
         Event newEvent = new Event();
         this.editEventFields(newEvent);
 
-        calendar.add(newEvent);
-        System.out.println("Event added successfully.");
+        if (calendar.add(newEvent)) {
+            System.out.println("Event added successfully.");
+        }
+        else {
+            System.out.println("The event was not added due conflicts with another event.");
+        }
     }
 
     private void modifyEvent(){
