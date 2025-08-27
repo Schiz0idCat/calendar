@@ -310,40 +310,56 @@ public class CalendarUI {
     }
 
     private void deleteEvent() {
-        System.out.println("Search for the event you want to delete...");
-        System.out.println("Search event by:");
-        System.out.println("1. Name");
-        System.out.println("2. Date");
-
+        boolean running = true;
         List<Event> events = null;
 
-        try {
-            int option = Integer.parseInt(scan.nextLine());
+        while (running) {
+            System.out.println("Search for the event you want to delete.");
+            System.out.println("Search event by:");
+            System.out.println("1. Name");
+            System.out.println("2. Date");
+            System.out.print("Select an option: ");
+            int option;
 
-            if (option == 1) {
-                events = this.searchEventsByName();
-            } else if (option == 2) {
-                events = this.searchEventsByDate();
-            } else {
-                System.out.println("Invalid option.");
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
                 return;
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Please, enter a valid number.");
-            return;
+
+            switch (option) {
+                case 1: // Buscar por nombre
+                events = this.searchEventsByName();
+                break;
+                case 2: // Buscar por fecha
+                events = this.searchEventsByDate();
+                break;
+                case 6: // salir de la interfaz
+                System.out.println("Exiting...");
+                running = false;
+                break;
+                default:
+                System.out.println("Invalid option, try again.");
+            }
         }
 
         Event eventToDelete = this.selectedEvent(events);
 
-        if (eventToDelete != null) {
-            System.out.print("Are you sure you want to delete this event? (y/n): ");
-            String confirmation = scan.nextLine();
-            if(confirmation.strip().equalsIgnoreCase("y")) {
-                calendar.removeEvent(eventToDelete);
-                System.out.println("Event deleted successfully.");
-            }
+        if (eventToDelete == null) {
+            System.out.println("No Event was selected.");
+            return;
         }
 
+        System.out.println(eventToDelete.toString());
+        System.out.print("Are you sure you want to delete this event? (y/n): ");
+
+        String confirmation = scan.nextLine();
+
+        if(confirmation.strip().equalsIgnoreCase("y")) {
+            calendar.remove(eventToDelete);
+            System.out.println("Event deleted successfully.");
+        }
     }
-    
 }
