@@ -176,17 +176,17 @@ public class CalendarUI {
 
             switch (option) {
                 case 1: // Buscar por nombre
-                events = this.searchEventsByName();
-                break;
+                    events = this.searchEventsByName();
+                    break;
                 case 2: // Buscar por fecha
-                events = this.searchEventsByDate();
-                break;
+                    events = this.searchEventsByDate();
+                    break;
                 case 6: // salir de la interfaz
-                System.out.println("Exiting...");
-                running = false;
-                break;
+                    System.out.println("Exiting...");
+                    running = false;
+                    break;
                 default:
-                System.out.println("Invalid option, try again.");
+                    System.out.println("Invalid option, try again.");
             }
         }
 
