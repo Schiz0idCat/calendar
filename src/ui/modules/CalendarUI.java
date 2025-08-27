@@ -111,6 +111,7 @@ public class CalendarUI {
                     else {
                         for(Event e : resultName) {
                             System.out.println(e.toString());
+                            System.out.println();
                         }
                     }
 
@@ -124,6 +125,7 @@ public class CalendarUI {
                     else {
                         for(Event e : resultDate) {
                             System.out.println(e.toString());
+                            System.out.println();
                         }
                     }
 
