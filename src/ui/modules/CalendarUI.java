@@ -45,6 +45,8 @@ public class CalendarUI {
                 continue;
             }
 
+            System.out.println();
+
             switch (option) {
                 case 1: // mostrar todos los eventos
                     this.listAllEvents();
@@ -68,6 +70,8 @@ public class CalendarUI {
                 default:
                     System.out.println("Invalid option, try again.");
             }
+
+            System.out.println();
         }
     }
 
@@ -95,30 +99,44 @@ public class CalendarUI {
                 continue;
             }
 
+            System.out.println();
+
             switch (option) {
                 case 1: // buscar eventos por nombre
                     List<Event> resultName = this.searchEventsByName();
 
-                    for(Event e : resultName) {
-                        System.out.println(e.toString());
+                    if (resultName.isEmpty()) {
+                        System.out.println("No coincidences were found.");
+                    }
+                    else {
+                        for(Event e : resultName) {
+                            System.out.println(e.toString());
+                        }
                     }
 
                     break;
                 case 2: // buscar eventos por fecha
                     List<Event> resultDate = this.searchEventsByDate();
 
-                    for(Event e : resultDate) {
-                        System.out.println(e.toString());
+                    if (resultDate.isEmpty()) {
+                        System.out.println("No coincidences were found.");
+                    }
+                    else {
+                        for(Event e : resultDate) {
+                            System.out.println(e.toString());
+                        }
                     }
 
                     break;
-                case 6: // salir de la interfaz
+                case 3: // salir de la interfaz
                     System.out.println("Exiting...");
                     running = false;
                     break;
                 default:
                     System.out.println("Invalid option, try again.");
             }
+
+            System.out.println();
         }
     }
 
@@ -370,17 +388,24 @@ public class CalendarUI {
     }
 
     private List<Event> searchEventsByName() {
-        System.out.println("Please, enter a keyword");
-
+        System.out.print("Please, enter a keyword: ");
         String keyword = scan.nextLine();
-        List<Event> result = calendar.searchByTitle(keyword);
+
+        List<Event> result = new ArrayList<>();
+
+        try {
+            result = calendar.searchByTitle(keyword);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         return result;
     }
 
     private List<Event> searchEventsByDate() {
         List<Event> result = new ArrayList<>();
-        System.out.println("Please, enter a date");
+        System.out.print("Please, enter a date: ");
         String strDate;
 
         strDate = scan.nextLine();
