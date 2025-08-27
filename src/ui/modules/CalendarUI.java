@@ -312,7 +312,7 @@ public class CalendarUI {
                         event.setStartTime(startTime);
                     }
                     catch (DateTimeParseException e) {
-                        System.out.println("Time format incorrect. The format is: " + this.fmtTime);
+                        System.out.println("Time format incorrect. The format is: " + config.getTimeFormat());
                     }
 
                     break;
@@ -325,7 +325,7 @@ public class CalendarUI {
                         event.setEndTime(endTime);
                     }
                     catch (DateTimeParseException e) {
-                        System.out.println("Time format incorrect. The format is: " + this.fmtTime);
+                        System.out.println("Time format incorrect. The format is: " + config.getTimeFormat());
                     }
 
                     break;
