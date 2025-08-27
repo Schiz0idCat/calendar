@@ -279,7 +279,13 @@ public class CalendarUI {
                 case 1: 
                     System.out.print("Enter new title: ");
                     String title = scan.nextLine();
-                    event.setTitle(title);
+
+                    try {
+                        event.setTitle(title);
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
 
                     break;
                 case 2: 
