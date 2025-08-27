@@ -97,7 +97,7 @@ public class Event {
     // Setters
     public void setTitle(String title) {
         if (title == null || title.trim().isEmpty()){
-            throw new IllegalArgumentException("Tittle cannot be null or empty");
+            throw new IllegalArgumentException("Title cannot be null or empty");
         }
         this.title = title.trim();
     }
