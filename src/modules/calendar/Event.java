@@ -156,12 +156,20 @@ public class Event {
         this.location = location.trim();
     }
 
+    public void setLocation() {
+        this.location = "";
+    }
+
     public void setDescription(String description) {
         if (description == null){
             this.description = "";
             return;
         }
         this.description = description.trim();
+    } 
+
+    public void setDescription() {
+            this.description = "";
     } 
 
     // Formatters
