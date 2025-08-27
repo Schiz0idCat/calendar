@@ -219,6 +219,7 @@ public class Event {
         "Date: " + this.fmtDate(config.getDateFormat()) + "\n" +
         "Start Time: " + this.fmtStartTime(config.getTimeFormat()) + "\n" +
         "End Time: " + this.fmtEndTime(config.getTimeFormat()) + "\n" +
+        "Is All Day: " + this.getIsAllDay() + "\n" +
         "Location: " + this.getLocation() + "\n" +
         "Description: " + this.getDescription();
     }
