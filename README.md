@@ -6,7 +6,7 @@
 **Autores:**
 - Agustín Guzmán.
 - Nicolás Leiva.
-- Felipe Marques.
+- Felipe Márquez.
 
 ---
 
