@@ -122,34 +122,113 @@ public class CalendarUI {
         }
     }
 
-    private List<Event> searchEventsByName() {
-        System.out.println("Please, enter a keyword");
+    private void enterNewEvent() {
+        Event newEvent = new Event();
+        this.editEventFields(newEvent);
 
-        String keyword = scan.nextLine();
-        List<Event> result = calendar.searchByTitle(keyword);
-
-        return result;
+        calendar.add(newEvent);
+        System.out.println("Event added successfully.");
     }
 
-    private List<Event> searchEventsByDate() {
-        List<Event> result = new ArrayList<>();
-        System.out.println("Please, enter a date");
-        String strDate;
+    private void modifyEvent(){
+        boolean running = true;
+        List<Event> events = null;
 
-        strDate = scan.nextLine();
-        LocalDate date = null;
+        while (running) {
+            System.out.println("Search for the event you want to modify.");
+            System.out.println("Search event by:");
+            System.out.println("1. Name");
+            System.out.println("2. Date");
+            System.out.print("Select an option: ");
+            int option;
 
-        try {
-            date = LocalDate.parse(strDate, fmtDate);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date. The format is: " + config.getDateFormat());
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                return;
+            }
+
+            switch (option) {
+                case 1: // Buscar por nombre
+                events = this.searchEventsByName();
+                break;
+                case 2: // Buscar por fecha
+                events = this.searchEventsByDate();
+                break;
+                case 6: // salir de la interfaz
+                System.out.println("Exiting...");
+                running = false;
+                break;
+                default:
+                System.out.println("Invalid option, try again.");
+            }
         }
 
-        if (date != null) {
-            result = calendar.searchByDate(date);
+        Event eventToModify = this.selectAnEvent(events);
+
+        if (eventToModify == null) {
+            System.out.println("No Event was selected.");
+            return;
         }
-        
-        return result;
+
+        this.editEventFields(eventToModify);
+        System.out.println("Event modified successfully.");
+    }
+
+    private void deleteEvent() {
+        boolean running = true;
+        List<Event> events = null;
+
+        while (running) {
+            System.out.println("Search for the event you want to delete.");
+            System.out.println("Search event by:");
+            System.out.println("1. Name");
+            System.out.println("2. Date");
+            System.out.print("Select an option: ");
+            int option;
+
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                return;
+            }
+
+            switch (option) {
+                case 1: // Buscar por nombre
+                events = this.searchEventsByName();
+                break;
+                case 2: // Buscar por fecha
+                events = this.searchEventsByDate();
+                break;
+                case 6: // salir de la interfaz
+                System.out.println("Exiting...");
+                running = false;
+                break;
+                default:
+                System.out.println("Invalid option, try again.");
+            }
+        }
+
+        Event eventToDelete = this.selectAnEvent(events);
+
+        if (eventToDelete == null) {
+            System.out.println("No Event was selected.");
+            return;
+        }
+
+        System.out.println(eventToDelete.toString());
+        System.out.print("Are you sure you want to delete this event? (y/n): ");
+
+        String confirmation = scan.nextLine();
+
+        if(confirmation.strip().equalsIgnoreCase("y")) {
+            calendar.remove(eventToDelete);
+            System.out.println("Event deleted successfully.");
+        }
     }
 
     private void editEventFields(Event event){
@@ -289,113 +368,34 @@ public class CalendarUI {
 
         return selectedEvent;
     }
-    
-    private void enterNewEvent() {
-        Event newEvent = new Event();
-        this.editEventFields(newEvent);
 
-        calendar.add(newEvent);
-        System.out.println("Event added successfully.");
+    private List<Event> searchEventsByName() {
+        System.out.println("Please, enter a keyword");
+
+        String keyword = scan.nextLine();
+        List<Event> result = calendar.searchByTitle(keyword);
+
+        return result;
     }
 
-    private void modifyEvent(){
-        boolean running = true;
-        List<Event> events = null;
+    private List<Event> searchEventsByDate() {
+        List<Event> result = new ArrayList<>();
+        System.out.println("Please, enter a date");
+        String strDate;
 
-        while (running) {
-            System.out.println("Search for the event you want to modify.");
-            System.out.println("Search event by:");
-            System.out.println("1. Name");
-            System.out.println("2. Date");
-            System.out.print("Select an option: ");
-            int option;
+        strDate = scan.nextLine();
+        LocalDate date = null;
 
-            try {
-                option = Integer.parseInt(scan.nextLine());
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Please, enter a valid number.");
-                return;
-            }
-
-            switch (option) {
-                case 1: // Buscar por nombre
-                events = this.searchEventsByName();
-                break;
-                case 2: // Buscar por fecha
-                events = this.searchEventsByDate();
-                break;
-                case 6: // salir de la interfaz
-                System.out.println("Exiting...");
-                running = false;
-                break;
-                default:
-                System.out.println("Invalid option, try again.");
-            }
+        try {
+            date = LocalDate.parse(strDate, fmtDate);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date. The format is: " + config.getDateFormat());
         }
 
-        Event eventToModify = this.selectAnEvent(events);
-
-        if (eventToModify == null) {
-            System.out.println("No Event was selected.");
-            return;
+        if (date != null) {
+            result = calendar.searchByDate(date);
         }
 
-        this.editEventFields(eventToModify);
-        System.out.println("Event modified successfully.");
-    }
-
-    private void deleteEvent() {
-        boolean running = true;
-        List<Event> events = null;
-
-        while (running) {
-            System.out.println("Search for the event you want to delete.");
-            System.out.println("Search event by:");
-            System.out.println("1. Name");
-            System.out.println("2. Date");
-            System.out.print("Select an option: ");
-            int option;
-
-            try {
-                option = Integer.parseInt(scan.nextLine());
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Please, enter a valid number.");
-                return;
-            }
-
-            switch (option) {
-                case 1: // Buscar por nombre
-                events = this.searchEventsByName();
-                break;
-                case 2: // Buscar por fecha
-                events = this.searchEventsByDate();
-                break;
-                case 6: // salir de la interfaz
-                System.out.println("Exiting...");
-                running = false;
-                break;
-                default:
-                System.out.println("Invalid option, try again.");
-            }
-        }
-
-        Event eventToDelete = this.selectAnEvent(events);
-
-        if (eventToDelete == null) {
-            System.out.println("No Event was selected.");
-            return;
-        }
-
-        System.out.println(eventToDelete.toString());
-        System.out.print("Are you sure you want to delete this event? (y/n): ");
-
-        String confirmation = scan.nextLine();
-
-        if(confirmation.strip().equalsIgnoreCase("y")) {
-            calendar.remove(eventToDelete);
-            System.out.println("Event deleted successfully.");
-        }
+        return result;
     }
 }
