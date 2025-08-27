@@ -9,12 +9,14 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class CalendarUI {
     private Calendar calendar;
     private Scanner scan;
+    private DateTimeFormatter fmtTime = DateTimeFormatter.ofPattern(config.getTimeFormat());
 
     private static final CalendarConfig config = Config.load().getCalendar();
 
@@ -149,50 +151,19 @@ public class CalendarUI {
         
         return result;
     }
-    //alguna otra forma de que no sea asi?
-    // Sí, la clase Event tiene el método .toString() para poder mostrarlo por pantalla
-    private void showEventFields(Event event){
-        System.out.println("\nCurrent Event Fields:");
 
-        String title = "empty";
-        if (event.getTitle() != null) {
-            title = event.getTitle();
-        }
-        System.out.println("1. Title: " + title);
-
-        String description = "empty";
-        if (event.getDescription() != null) {
-            description = event.getDescription();
-        }
-        System.out.println("2. Description: " + description);
-
-        String dateStr = "empty";
-        if (event.getDate() != null) {
-            dateStr = event.getDate().format(DateTimeFormatter.ofPattern(config.getDateFormat()));
-        }
-        System.out.println("3. Date: " + dateStr);
-
-        String time = "empty";
-        if (event.getTime() != null) {
-            time = event.getTime();
-        }
-        System.out.println("4. Time: " + time);
-
-        String location = "empty";
-        if (event.getLocation() != null) {
-            location = event.getLocation();
-        }
-        System.out.println("5. Location: " + location);
-
-        System.out.println("6. Save and Exit");
-        System.out.println("7. Exit without saving");
-
-    }
-    private Event editEventFields(Event event){
+    private void editEventFields(Event event){
         boolean editing = true;
+        String[] lines = event.toString().split("\n");
+        StringBuilder EventIndexed = new StringBuilder();
+
+        for (int i = 0; i < lines.length; i++) {
+            EventIndexed.append(i + 1).append(". ").append(lines[i]).append("\n");
+        }
 
         while (editing) {
-            this.showEventFields(event);
+            System.out.println(EventIndexed);
+            System.out.println("7. Exit.");
             System.out.print("Select an option to edit: ");
             int option;
 
@@ -209,13 +180,9 @@ public class CalendarUI {
                     System.out.print("Enter new title: ");
                     String title = scan.nextLine();
                     event.setTitle(title);
+
                     break;
                 case 2: 
-                    System.out.print("Enter new description: ");
-                    String description = scan.nextLine();
-                    event.setDescription(description);
-                    break;
-                case 3: 
                     System.out.print("Enter new date (" + config.getDateFormat() + "): ");
                     String strDate = scan.nextLine();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(config.getDateFormat());
@@ -224,33 +191,45 @@ public class CalendarUI {
                     try {
                         date = LocalDate.parse(strDate, formatter);
                         event.setDate(date);
-                    } catch (DateTimeParseException e) {
+                    }
+                    catch (DateTimeParseException e) {
                         System.out.println("Invalid date. The format is: " + config.getDateFormat());
                     }
+
+                    break;
+                case 3: 
+                    System.out.print("Enter new start time (" + config.getTimeFormat() + "): ");
+                    String strStartTime = scan.nextLine();
+                    LocalTime startTime = LocalTime.parse(strStartTime, this.fmtTime);
+                    event.setStartTime(startTime);
+
                     break;
                 case 4: 
-                    System.out.print("Enter new time (HH:mm): ");
-                    String time = scan.nextLine();
-                    event.setTime(time);
+                    System.out.print("Enter new start time (" + config.getTimeFormat() + "): ");
+                    String strEndTime = scan.nextLine();
+                    LocalTime endTime = LocalTime.parse(strEndTime, this.fmtTime);
+                    event.setStartTime(endTime);
+
                     break;
                 case 5: 
                     System.out.print("Enter new location: ");
                     String location = scan.nextLine();
                     event.setLocation(location);
+
                     break;
                 case 6: 
+                    System.out.print("Enter new description: ");
+                    String description = scan.nextLine();
+                    event.setDescription(description);
+
+                    break;
+                case 7: 
                     System.out.println("Saving changes and exiting...");
                     editing = false;
-                    return event;
-                case 7: 
-                    System.out.println("Exiting without saving...");
-                    editing = false;
-                    return null;
                 default:
                     System.out.println("Invalid option, try again.");
             }
         }
-        return null;
     }
 
     private Event selectAnEvent(List<Event> events) {
