@@ -103,7 +103,7 @@ public class Event {
     }
 
     public void setTitle() {
-        this.title = "";
+        this.title = "default title";
     }
 
     public void setDate(LocalDate date) {
