@@ -150,6 +150,7 @@ public class CalendarUI {
         return result;
     }
     //alguna otra forma de que no sea asi?
+    // Sí, la clase Event tiene el método .toString() para poder mostrarlo por pantalla
     private void showEventFields(Event event){
         System.out.println("\nCurrent Event Fields:");
 
