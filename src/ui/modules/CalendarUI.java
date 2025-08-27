@@ -294,19 +294,50 @@ public class CalendarUI {
     }
 
     private void modifyEvent(){
-        System.out.println("Search for the event you want to modify...");
-        List<Event> events = this.searchEventsByName();
+        boolean running = true;
+        List<Event> events = null;
+
+        while (running) {
+            System.out.println("Search for the event you want to modify.");
+            System.out.println("Search event by:");
+            System.out.println("1. Name");
+            System.out.println("2. Date");
+            System.out.print("Select an option: ");
+            int option;
+
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                return;
+            }
+
+            switch (option) {
+                case 1: // Buscar por nombre
+                events = this.searchEventsByName();
+                break;
+                case 2: // Buscar por fecha
+                events = this.searchEventsByDate();
+                break;
+                case 6: // salir de la interfaz
+                System.out.println("Exiting...");
+                running = false;
+                break;
+                default:
+                System.out.println("Invalid option, try again.");
+            }
+        }
 
         Event eventToModify = this.selectedEvent(events);
 
-        if (eventToModify != null) {
-            Event modifiedEvent = this.editEventFields(eventToModify);
-
-            if (modifiedEvent != null) {
-                calendar.updateEvent(eventToModify, modifiedEvent);
-                System.out.println("Event modified successfully.");
-            }
+        if (eventToModify == null) {
+            System.out.println("No Event was selected.");
+            return;
         }
+
+        this.editEventFields(eventToModify);
+        System.out.println("Event modified successfully.");
     }
 
     private void deleteEvent() {
