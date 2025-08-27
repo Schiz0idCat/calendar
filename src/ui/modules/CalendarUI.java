@@ -16,6 +16,7 @@ import java.time.format.DateTimeParseException;
 public class CalendarUI {
     private Calendar calendar;
     private Scanner scan;
+    private DateTimeFormatter fmtDate = DateTimeFormatter.ofPattern(config.getDateFormat());
     private DateTimeFormatter fmtTime = DateTimeFormatter.ofPattern(config.getTimeFormat());
 
     private static final CalendarConfig config = Config.load().getCalendar();
@@ -136,11 +137,10 @@ public class CalendarUI {
         String strDate;
 
         strDate = scan.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(config.getDateFormat());
         LocalDate date = null;
 
         try {
-            date = LocalDate.parse(strDate, formatter);
+            date = LocalDate.parse(strDate, fmtDate);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid date. The format is: " + config.getDateFormat());
         }
