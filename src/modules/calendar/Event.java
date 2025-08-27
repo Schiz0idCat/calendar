@@ -22,6 +22,14 @@ public class Event {
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59);
 
     // Constructor
+    public Event() {
+        this.setTitle();
+        this.setDate();
+        this.setIsAllDay();
+        this.setLocation();
+        this.setDescription();
+    }
+
     public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isAllDay, String location, String description) {
         this.setTitle(title);
         this.setDate(date);
@@ -94,11 +102,19 @@ public class Event {
         this.title = title.trim();
     }
 
+    public void setTitle() {
+        this.title = "";
+    }
+
     public void setDate(LocalDate date) {
         if(date == null) {
             throw new IllegalArgumentException("Date cannot be null or empty");
         }
         this.date = date;
+    }
+
+    public void setDate() {
+        this.date = LocalDate.now();
     }
 
     public void setStartTime(LocalTime startTime) {
@@ -139,6 +155,12 @@ public class Event {
             this.startTime = LocalTime.MIN;
             this.endTime = END_OF_DAY;
         }
+    }
+
+    public void setIsAllDay() {
+        this.isAllDay = true;
+        this.startTime = LocalTime.MIN;
+        this.endTime = END_OF_DAY;
     }
 
     public void setRecurrence(Recurrence recurrence) {
