@@ -285,12 +285,10 @@ public class CalendarUI {
     
     private void enterNewEvent() {
         Event newEvent = new Event();
-        Event result = editEventFields(newEvent);
+        this.editEventFields(newEvent);
 
-        if (result != null) {
-            calendar.addEvent(result);
-            System.out.println("Event added successfully.");
-        }
+        calendar.add(newEvent);
+        System.out.println("Event added successfully.");
     }
 
     private void modifyEvent(){
