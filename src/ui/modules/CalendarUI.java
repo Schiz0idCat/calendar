@@ -200,15 +200,27 @@ public class CalendarUI {
                 case 3: 
                     System.out.print("Enter new start time (" + config.getTimeFormat() + "): ");
                     String strStartTime = scan.nextLine();
-                    LocalTime startTime = LocalTime.parse(strStartTime, this.fmtTime);
-                    event.setStartTime(startTime);
+
+                    try {
+                        LocalTime startTime = LocalTime.parse(strStartTime, this.fmtTime);
+                        event.setStartTime(startTime);
+                    }
+                    catch (DateTimeParseException e) {
+                        System.out.println("Time format incorrect. The format is: " + this.fmtTime);
+                    }
 
                     break;
                 case 4: 
                     System.out.print("Enter new start time (" + config.getTimeFormat() + "): ");
                     String strEndTime = scan.nextLine();
-                    LocalTime endTime = LocalTime.parse(strEndTime, this.fmtTime);
-                    event.setStartTime(endTime);
+
+                    try {
+                        LocalTime endTime = LocalTime.parse(strEndTime, this.fmtTime);
+                        event.setEndTime(endTime);
+                    }
+                    catch (DateTimeParseException e) {
+                        System.out.println("Time format incorrect. The format is: " + this.fmtTime);
+                    }
 
                     break;
                 case 5: 
