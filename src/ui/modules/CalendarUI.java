@@ -361,6 +361,8 @@ public class CalendarUI {
                 case 8: 
                     System.out.println("Saving changes and exiting...");
                     editing = false;
+
+                    break;
                 default:
                     System.out.println("Invalid option, try again.");
             }
