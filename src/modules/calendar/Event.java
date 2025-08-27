@@ -217,7 +217,8 @@ public class Event {
     public String toString() {
         return "Event: " + this.getTitle() + "\n" +
         "Date: " + this.fmtDate(config.getDateFormat()) + "\n" +
-        "Time: " + this.fmtStartTime(config.getTimeFormat()) + " - " + this.fmtEndTime(config.getTimeFormat()) + "\n" +
+        "Start Time: " + this.fmtStartTime(config.getTimeFormat()) + "\n" +
+        "End Time: " + this.fmtEndTime(config.getTimeFormat()) + "\n" +
         "Location: " + this.getLocation() + "\n" +
         "Description: " + this.getDescription();
     }
