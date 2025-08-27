@@ -18,12 +18,20 @@ public class Calendar {
     }
 
     private int cmpEvents(Event e1, Event e2) {
+        // Comparar fecha
         int cmp = e1.getDate().compareTo(e2.getDate());
+        if (cmp != 0) return cmp;
 
-        if (cmp == 0) {
-            return e1.getStartTime().compareTo(e2.getStartTime());
-        }
+        // Comparar hora de inicio
+        cmp = e1.getStartTime().compareTo(e2.getStartTime());
+        if (cmp != 0) return cmp;
 
+        // Comparar hora de fin
+        cmp = e1.getEndTime().compareTo(e2.getEndTime());
+        if (cmp != 0) return cmp;
+
+        // Comparar título
+        cmp = e1.getTitle().compareToIgnoreCase(e2.getTitle());
         return cmp;
     }
 
