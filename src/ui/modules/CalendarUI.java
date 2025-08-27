@@ -217,17 +217,17 @@ public class CalendarUI {
 
             switch (option) {
                 case 1: // Buscar por nombre
-                events = this.searchEventsByName();
-                break;
+                    events = this.searchEventsByName();
+                    break;
                 case 2: // Buscar por fecha
-                events = this.searchEventsByDate();
-                break;
+                    events = this.searchEventsByDate();
+                    break;
                 case 6: // salir de la interfaz
-                System.out.println("Exiting...");
-                running = false;
+                    System.out.println("Exiting...");
+                    running = false;
                 break;
                 default:
-                System.out.println("Invalid option, try again.");
+                    System.out.println("Invalid option, try again.");
             }
         }
 
@@ -251,16 +251,19 @@ public class CalendarUI {
 
     private void editEventFields(Event event){
         boolean editing = true;
-        String[] lines = event.toString().split("\n");
-        StringBuilder EventIndexed = new StringBuilder();
-
-        for (int i = 0; i < lines.length; i++) {
-            EventIndexed.append(i + 1).append(". ").append(lines[i]).append("\n");
-        }
 
         while (editing) {
-            System.out.println(EventIndexed);
-            System.out.println("7. Exit.");
+            System.out.println();
+
+            String[] lines = event.toString().split("\n");
+            StringBuilder EventIndexed = new StringBuilder();
+
+            for (int i = 0; i < lines.length; i++) {
+                EventIndexed.append(i + 1).append(". ").append(lines[i]).append("\n");
+            }
+
+            System.out.print(EventIndexed);
+            System.out.println("8. Exit.");
             System.out.print("Select an option to edit: ");
             int option;
 
@@ -321,18 +324,35 @@ public class CalendarUI {
 
                     break;
                 case 5: 
+                    System.out.print("Enter if it is an all day event (true/false): ");
+                    String strBool = scan.nextLine();
+
+                    try {
+                        if (!strBool.equalsIgnoreCase("true") && !strBool.equalsIgnoreCase("false")) {
+                            throw new IllegalArgumentException();
+                        }
+
+                        boolean allDay = Boolean.parseBoolean(strBool);
+                        event.setIsAllDay(allDay);
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("You must enter 'true' or 'false'");
+                    }
+
+                    break;
+                case 6: 
                     System.out.print("Enter new location: ");
                     String location = scan.nextLine();
                     event.setLocation(location);
 
                     break;
-                case 6: 
+                case 7: 
                     System.out.print("Enter new description: ");
                     String description = scan.nextLine();
                     event.setDescription(description);
 
                     break;
-                case 7: 
+                case 8: 
                     System.out.println("Saving changes and exiting...");
                     editing = false;
                 default:
