@@ -237,6 +237,8 @@ public class CalendarUI {
                 default:
                     System.out.println("Invalid option, try again.");
             }
+
+            if (!events.isEmpty()) running = false;
         }
 
         Event eventToDelete = this.selectAnEvent(events);
@@ -246,7 +248,7 @@ public class CalendarUI {
             return;
         }
 
-        System.out.println(eventToDelete.toString());
+        System.out.println("\n" + eventToDelete.toString());
         System.out.print("Are you sure you want to delete this event? (y/n): ");
 
         String confirmation = scan.nextLine();
