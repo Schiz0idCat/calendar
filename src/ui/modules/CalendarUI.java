@@ -163,6 +163,7 @@ public class CalendarUI {
             System.out.println("Search event by:");
             System.out.println("1. Name");
             System.out.println("2. Date");
+            System.out.println("3. Exit");
             System.out.print("Select an option: ");
             int option;
 
@@ -181,7 +182,7 @@ public class CalendarUI {
                 case 2: // Buscar por fecha
                     events = this.searchEventsByDate();
                     break;
-                case 6: // salir de la interfaz
+                case 3: // salir de la interfaz
                     System.out.println("Exiting...");
                     running = false;
                     break;
@@ -212,6 +213,7 @@ public class CalendarUI {
             System.out.println("Search event by:");
             System.out.println("1. Name");
             System.out.println("2. Date");
+            System.out.println("3. Exit");
             System.out.print("Select an option: ");
             int option;
 
@@ -230,7 +232,7 @@ public class CalendarUI {
                 case 2: // Buscar por fecha
                     events = this.searchEventsByDate();
                     break;
-                case 6: // salir de la interfaz
+                case 3: // salir de la interfaz
                     System.out.println("Exiting...");
                     running = false;
                 break;
@@ -327,7 +329,7 @@ public class CalendarUI {
 
                     break;
                 case 4: 
-                    System.out.print("Enter new start time (" + config.getTimeFormat() + "): ");
+                    System.out.print("Enter new end time (" + config.getTimeFormat() + "): ");
                     String strEndTime = scan.nextLine();
 
                     try {
