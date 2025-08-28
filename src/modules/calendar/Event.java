@@ -14,7 +14,6 @@ public class Event {
     private LocalTime startTime;
     private LocalTime endTime;
     private boolean isAllDay;
-    private Recurrence recurrence;
     private String location;
     private String description;
 
@@ -80,10 +79,6 @@ public class Event {
 
     public boolean getIsAllDay() {
         return this.isAllDay;
-    }
-
-    public Recurrence getRecurrence() {
-        return this.recurrence;
     }
 
     public String getLocation() {
@@ -161,13 +156,6 @@ public class Event {
         this.isAllDay = true;
         this.startTime = LocalTime.MIN;
         this.endTime = END_OF_DAY;
-    }
-
-    public void setRecurrence(Recurrence recurrence) {
-        if (recurrence == null) {
-            throw new IllegalArgumentException("Reccurrence cannot be null");
-        }
-        this.recurrence = recurrence;
     }
 
     public void setLocation(String location) {
