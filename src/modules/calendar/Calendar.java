@@ -10,11 +10,11 @@ public class Calendar {
 
     // Constructor
     public Calendar() {
-        events = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
     public List<Event> getAllEvents() {
-        return new ArrayList<>(events); 
+        return new ArrayList<>(this.events); 
     }
 
     private int cmpEvents(Event e1, Event e2) {
@@ -38,12 +38,12 @@ public class Calendar {
     public boolean add(Event event) {
         if (event == null) throw new IllegalArgumentException("Event cannot be null");
 
-        int index = Collections.binarySearch(events, event, this::cmpEvents);
+        int index = Collections.binarySearch(this.events, event, this::cmpEvents);
 
         if (index >= 0) return false;
 
         index = -index - 1;
-        events.add(index, event);
+        this.events.add(index, event);
 
         return true;        
     }
@@ -51,11 +51,11 @@ public class Calendar {
     public Event remove(Event event) {
         if (event == null) throw new IllegalArgumentException("Event cannot be null");
 
-        int index = Collections.binarySearch(events, event, this::cmpEvents);
+        int index = Collections.binarySearch(this.events, event, this::cmpEvents);
 
         if (index < 0) return null;
 
-        return events.remove(index);
+        return this.events.remove(index);
     }
 
     public List<Event> searchByTitle(String keyword) {
@@ -64,7 +64,7 @@ public class Calendar {
 
         List<Event> result = new ArrayList<>();
 
-        for(Event e : events) {
+        for(Event e : this.events) {
             if(e.getTitle().toLowerCase().trim().contains(keyword.toLowerCase().trim())) {
                 result.add(e);
             }
@@ -78,7 +78,7 @@ public class Calendar {
 
         List<Event> result = new ArrayList<>();
 
-        for(Event e : events) {
+        for(Event e : this.events) {
             if(e.getDate().equals(date)) {
                 result.add(e);
             }
@@ -89,11 +89,11 @@ public class Calendar {
 
     @Override
     public String toString() {
-        if(events.isEmpty()) return "No events in calendar";
+        if(this.events.isEmpty()) return "No events in calendar";
 
         StringBuilder result = new StringBuilder();
 
-        for (Event e : events) {
+        for (Event e : this.events) {
             result.append(e.toString()).append("\n\n");
         }
 

@@ -18,7 +18,7 @@ public class Event {
     private boolean isAllDay;
     private String location;
     private String description;
-    private Map<String, Person> participants = new HashMap<>();
+    private Map<String, Person> participants;
 
     private static final CalendarConfig config = Config.load().getCalendar();
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59);
@@ -30,6 +30,7 @@ public class Event {
         this.setIsAllDay();
         this.setLocation();
         this.setDescription();
+        this.setParticipants();
     }
 
     // Getters
@@ -191,6 +192,9 @@ public class Event {
         return participants;
     }
 
+    private void setParticipants() {
+        this.participants = new HashMap<>();
+    }
 
     @Override
     public String toString() {
