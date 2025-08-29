@@ -200,7 +200,7 @@ public class PeopleUI {
             System.out.println("Person removed successfully.");
         }
         else {
-            System.out.println("Person was NO removed.");
+            System.out.println("Person was NOT removed.");
         }
     }
 }
