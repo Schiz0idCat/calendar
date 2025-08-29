@@ -1,0 +1,44 @@
+graph TD
+    %% Application Layer
+    subgraph "Application Layer"
+        A[Main Application<br/>Entry Point]
+    end
+
+    %% Calendar Domain
+    subgraph "Calendar Domain"
+        B1[Calendar Manager<br/>Manages Events]
+        C1[Event 1]
+        C2[Event 2]
+        C3[Event 3]
+    end
+
+    %% People Domain
+    subgraph "People Domain"
+        E1[People Manager<br/>Manages Persons]
+        F1[Person 1]
+        F2[Person 2]
+        F3[Person 3]
+    end
+
+    %% Application to Domains
+    A --> B1
+    A --> E1
+
+    %% Calendar to Events
+    B1 --> C1
+    B1 --> C2
+    B1 --> C3
+
+    %% People to Persons
+    E1 --> F1
+    E1 --> F2
+    E1 --> F3
+
+    %% Example participations
+    C1 --> F1
+    C2 --> F2
+    C3 --> F1
+    C3 --> F3
+
+    %% Styles
+    style A fill:#e3f2fd,stroke
