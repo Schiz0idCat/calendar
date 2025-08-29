@@ -3,7 +3,6 @@ package config.modules;
 public class CalendarConfig {
     private String dateFormat;
     private String timeFormat;
-    private String weekStart;
 
     // Getters
     public String getDateFormat() {
@@ -14,34 +13,28 @@ public class CalendarConfig {
         return this.timeFormat;
     }
 
-    public String getWeekStart() {
-        return this.weekStart;
-    }
-
     // Setters
+    // TODO: Hacer que esto modifique settings.toml
+    // TODO: Añadir validaciones para corroborar que sea un formato admitido
     public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
     }
 
+    // TODO: Hacer que esto modifique settings.toml
+    // TODO: Añadir validaciones para corroborar que sea un formato admitido
     public void setTimeFormat(String timeFormat) {
         this.timeFormat = timeFormat;
     }
 
-    public void setWeekStart(String weekStart) {
-        this.weekStart = weekStart;
-    }
-
     // Setters to default
+    // TODO: Hacer que esto modifique settings.toml
     public void setDateFormat() {
         this.dateFormat = "dd-MM-yyyy";
     }
 
+    // TODO: Hacer que esto modifique settings.toml
     public void setTimeFormat() {
         this.timeFormat = "HH:mm";
-    }
-
-    public void setWeekStart() {
-        this.weekStart = "MONDAY";
     }
 
     // Formatter
@@ -49,7 +42,6 @@ public class CalendarConfig {
     public String toString() {
         return "[calendar]" + "\n" +
         "dateFormat = \"" + this.getDateFormat() + "\"" + "\n" +
-        "timeFormat = \"" + this.getTimeFormat() + "\"" + "\n" +
-        "weekStart = \"" + this.getWeekStart() + "\"";
+        "timeFormat = \"" + this.getTimeFormat() + "\"";
     }
 }

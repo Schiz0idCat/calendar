@@ -1,4 +1,3 @@
 [calendar]
 dateFormat="dd-MM-yyyy"
 timeFormat="HH:mm"
-weekStart="MONDAY"

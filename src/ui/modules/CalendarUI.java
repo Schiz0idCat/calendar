@@ -8,7 +8,6 @@ import modules.people.People;
 import modules.people.Person;
 
 import java.util.Scanner;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;

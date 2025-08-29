@@ -14,18 +14,6 @@ public class Person {
         this.setPhone();
     }
 
-    public Person(String rut, String name, String email, int phone) {
-        this.setRut(rut);
-        this.setName(name);
-        this.setEmail(email);
-        this.setPhone(phone);
-    }
-
-    public Person(String rut, String name) {
-        this.setRut(rut);
-        this.setName(name);
-    }
-
     // Getters
     public String getRut() {
         return rut;

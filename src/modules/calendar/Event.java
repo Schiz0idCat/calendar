@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Event {
-    private int id;
     private String title;
     private LocalDate date;
     private LocalTime startTime;
@@ -33,38 +32,7 @@ public class Event {
         this.setDescription();
     }
 
-    public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isAllDay, String location, String description) {
-        this.setTitle(title);
-        this.setDate(date);
-        this.setStartTime(startTime);
-        this.setEndTime(endTime);
-        this.setIsAllDay(isAllDay);
-        this.setLocation(location);
-        this.setDescription(description);
-    }
-
-    public Event(String title, LocalDate date, LocalTime startTime, LocalTime endTime, String location, String description) {
-        this.setTitle(title);
-        this.setDate(date);
-        this.setStartTime(startTime);
-        this.setEndTime(endTime);
-        this.setLocation(location);
-        this.setDescription(description);
-    }
-
-    public Event(String title, LocalDate date, boolean isAllDay, String location, String description) {
-        this.setTitle(title);
-        this.setDate(date);
-        this.setIsAllDay(isAllDay);
-        this.setLocation(location);
-        this.setDescription(description);
-    }
-
     // Getters
-    public int getId() {
-        return this.id;
-    }
-
     public String getTitle() {
         return this.title;
     }
