@@ -12,34 +12,34 @@ public class People {
 
     public void add(Person person) {
         if (person == null) throw new IllegalArgumentException("person cannot be null");
-        if (people.containsKey(person.getRut())) {
+        if (this.people.containsKey(person.getRut())) {
             throw new IllegalArgumentException("person with RUT: " + person.getRut() + ". Already exists");
         }
 
-        people.put(person.getRut(), person);
+        this.people.put(person.getRut(), person);
     }
 
     public Person get(String rut) {
-        return people.get(rut);
+        return this.people.get(rut);
     }
 
     public void remove(String rut) {
-        people.remove(rut);
+        this.people.remove(rut);
     }
 
     public boolean contains(String rut) {
-        return people.containsKey(rut);
+        return this.people.containsKey(rut);
     }
 
     public boolean isEmpty() {
-        return people.isEmpty();
+        return this.people.isEmpty();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Person person : people.values()) {
+        for (Person person : this.people.values()) {
             sb.append(person.toString()).append("\n---\n");
         }
 
