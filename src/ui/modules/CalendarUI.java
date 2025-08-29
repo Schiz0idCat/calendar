@@ -265,7 +265,7 @@ public class CalendarUI {
         }
     }
 
-    private void editEventFields(Event event){
+    private void editEventFields(Event event) {
         boolean editing = true;
 
         while (editing) {
