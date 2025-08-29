@@ -34,13 +34,6 @@ tales son:
 - location (String)       -> Lugar del evento
 - description (String)    -> Detalles del evento
 
-
-add(Person person) -> void:
-get(String rut) -> Person:
-remove(String rut) -> void:
-contains(String rut) -> boolean:
-isEmpty() -> boolean:
-
 ### Clases auxiliares
 #### UI
 ##### Clase UI
