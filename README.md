@@ -2,7 +2,7 @@
     * [Instrucciones](#Instrucciones)
     * [Dependencias](#Dependencias)
     * [Compilación](#Compilación)
-* [CONFIGURATION](#configuration)
+* [Configuración](#Configuración)
     * [Calendario](#Calendario)
 
 # Instalación
