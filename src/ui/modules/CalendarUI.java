@@ -4,8 +4,11 @@ import config.Config;
 import config.modules.CalendarConfig;
 import modules.calendar.Calendar;
 import modules.calendar.Event;
+import modules.people.People;
+import modules.people.Person;
 
 import java.util.Scanner;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -15,14 +18,16 @@ import java.time.format.DateTimeParseException;
 
 public class CalendarUI {
     private Calendar calendar;
+    private People people;
     private Scanner scan;
     private DateTimeFormatter fmtDate = DateTimeFormatter.ofPattern(config.getDateFormat());
     private DateTimeFormatter fmtTime = DateTimeFormatter.ofPattern(config.getTimeFormat());
 
     private static final CalendarConfig config = Config.load().getCalendar();
 
-    public void run(Scanner scan, Calendar calendar) {
+    public void run(Scanner scan, Calendar calendar, People people) {
         this.calendar = calendar;
+        this.people = people;
         this.scan = scan;
 
         boolean running = true;
@@ -267,15 +272,23 @@ public class CalendarUI {
         while (editing) {
             System.out.println();
 
-            String[] lines = event.toString().split("\n");
-            StringBuilder EventIndexed = new StringBuilder();
+            System.out.println("\nEvent details:");
+            System.out.println("1. Title: " + event.getTitle());
+            System.out.println("2. Date: " + event.fmtDate(config.getDateFormat()));
+            System.out.println("3. Start Time: " + event.fmtStartTime(config.getTimeFormat()));
+            System.out.println("4. End Time: " + event.fmtEndTime(config.getTimeFormat()));
+            System.out.println("5. All Day: " + event.getIsAllDay());
+            System.out.println("6. Location: " + event.getLocation());
+            System.out.println("7. Description: " + event.getDescription());
+            System.out.println("8. Participants:");
 
-            for (int i = 0; i < lines.length; i++) {
-                EventIndexed.append(i + 1).append(". ").append(lines[i]).append("\n");
+            if (!event.getParticipants().isEmpty()) {
+                for (Person person : event.getParticipants().values()) {
+                    System.out.println("   - " + person.getName() + " (" + person.getRut() + ")");
+                }
             }
 
-            System.out.print(EventIndexed);
-            System.out.println("8. Exit.");
+            System.out.println("9. Exit");
             System.out.print("Select an option to edit: ");
             int option;
 
@@ -371,6 +384,14 @@ public class CalendarUI {
 
                     break;
                 case 8: 
+                    if (people.isEmpty()) {
+                        System.out.println("There are no people registered.");
+                        continue;
+                    }
+
+                    this.modifyParticipants(event);
+                    break;
+                case 9:
                     System.out.println("Saving changes and exiting...");
                     editing = false;
 
@@ -378,6 +399,79 @@ public class CalendarUI {
                 default:
                     System.out.println("Invalid option, try again.");
             }
+        }
+    }
+
+    private void modifyParticipants(Event event) {
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\nParticipants:");
+
+            for (Person person : event.getParticipants().values()) {
+                System.out.println(" - " + person.getName() + " (" + person.getRut() + ")");
+            }
+
+            System.out.println("1. Add participant.");
+            System.out.println("2. Remove participant.");
+            System.out.println("3. Exit.");
+            System.out.print("Select an option to edit: ");
+
+            int option;
+            try {
+                option = Integer.parseInt(scan.nextLine());
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please, enter a valid number.");
+                continue;
+            }
+
+            switch (option) {
+                case 1:
+                    this.addParticipant(event);
+                    break;
+                case 2:
+                    this.removeParticipant(event);
+                    break;
+                case 3:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option, try again.");
+            }
+        }
+    }
+
+    private void addParticipant(Event event) {
+        System.out.print("Enter RUT of the person to add: ");
+        String rut = scan.nextLine().trim();
+
+        Person person = people.get(rut);
+
+        if (person != null) {
+            event.addParticipant(person);
+            System.out.println("Participant added: " + person.getName());
+        }
+        else {
+            System.out.println("No person found with RUT: " + rut);
+        }
+    }
+
+    private void removeParticipant(Event event) {
+        if (event.getParticipants().isEmpty()) {
+            System.out.println("No participants to remove.");
+            return;
+        }
+
+        System.out.print("Enter RUT of the person to remove: ");
+        String rut = scan.nextLine().trim();
+
+        if (event.getParticipants().containsKey(rut)) {
+            event.removeParticipant(rut);
+            System.out.println("Participant removed.");
+        }
+        else {
+            System.out.println("No participant found with RUT: " + rut);
         }
     }
 

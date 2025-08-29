@@ -2,10 +2,13 @@ package modules.calendar;
 
 import config.Config;
 import config.modules.CalendarConfig;
+import modules.people.Person;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Event {
     private int id;
@@ -16,6 +19,7 @@ public class Event {
     private boolean isAllDay;
     private String location;
     private String description;
+    private Map<String, Person> participants = new HashMap<>();
 
     private static final CalendarConfig config = Config.load().getCalendar();
     private static final LocalTime END_OF_DAY = LocalTime.of(23, 59);
@@ -201,14 +205,44 @@ public class Event {
         return this.getEndTime().format(format);
     }
 
+    // Participants
+    public boolean addParticipant(Person person) {
+        if (person != null) {
+            this.participants.put(person.getRut(), person);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void removeParticipant(String rut) {
+        this.participants.remove(rut);
+    }
+
+    public Map<String, Person> getParticipants() {
+        return participants;
+    }
+
+
     @Override
     public String toString() {
-        return "Event: " + this.getTitle() + "\n" +
+        StringBuilder event = new StringBuilder();
+
+        event.append("Event: " + this.getTitle() + "\n" +
         "Date: " + this.fmtDate(config.getDateFormat()) + "\n" +
         "Start Time: " + this.fmtStartTime(config.getTimeFormat()) + "\n" +
         "End Time: " + this.fmtEndTime(config.getTimeFormat()) + "\n" +
         "Is All Day: " + this.getIsAllDay() + "\n" +
         "Location: " + this.getLocation() + "\n" +
-        "Description: " + this.getDescription();
+        "Description: " + this.getDescription());
+
+        if (this.getParticipants().size() == 0) return event.toString();
+
+        event.append("Participants:\n");
+        for (Person person : this.getParticipants().values()) {
+            event.append("- ").append(person.getName()).append(" (").append(person.getRut()).append(")\n");
+        }
+
+        return event.toString();
     }
 }
