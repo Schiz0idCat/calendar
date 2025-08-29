@@ -1,0 +1,23 @@
+flowchart TD
+    A[Start Application] --> B[Initialize Calendar & People]
+    B --> C[Display Main Menu]
+
+    C -->|Calendar| D[Calendar Menu]
+    C -->|People| E[People Menu]
+    C -->|Exit| F[End Application]
+
+    %% Calendar options
+    D -->|List Events| G[Show Events]
+    D -->|Search Events| H[Search by Title or Date]
+    D -->|Add Event| I[Enter Event Details]
+    D -->|Modify Event| J[Update Event]
+    D -->|Remove Event| K[Delete Event]
+    D -->|Back| C
+
+    %% People options
+    E -->|List People| L[Show People]
+    E -->|Search Person| M[Search by RUT]
+    E -->|Add Person| N[Enter Person Details]
+    E -->|Modify Person| O[Update Person]
+    E -->|Remove Person| P[Delete Person]
+    E -->|Back| C
