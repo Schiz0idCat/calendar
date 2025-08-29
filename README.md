@@ -12,7 +12,7 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
 # Instalación
 ## Instrucciones
 ```
-git clone https://www.schiz0idcat/calendar.git calendar
+git clone https://www.github.com/schiz0idcat/calendar.git calendar
 cd calendar
 ```
 
