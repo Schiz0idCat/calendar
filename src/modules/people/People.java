@@ -10,6 +10,10 @@ public class People {
         this.people = new HashMap<>();
     }
 
+    public Map<String, Person> getPeople() {
+        return Map.copyOf(this.people);
+    }
+
     public void add(Person person) {
         if (person == null) throw new IllegalArgumentException("person cannot be null");
         if (this.people.containsKey(person.getRut())) {
@@ -19,12 +23,12 @@ public class People {
         this.people.put(person.getRut(), person);
     }
 
-    public Person get(String rut) {
-        return this.people.get(rut);
-    }
-
     public void remove(String rut) {
         this.people.remove(rut);
+    }
+
+    public Person get(String rut) {
+        return this.people.get(rut);
     }
 
     public boolean contains(String rut) {
