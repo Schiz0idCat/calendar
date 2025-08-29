@@ -1,0 +1,197 @@
+classDiagram
+    class Main {
+        +main(String[] args) void
+    }
+
+    class MainUI {
+        +run(Calendar calendar, People people) void
+    }
+
+    class CalendarUI {
+        -Calendar calendar
+        -People people
+        -Scanner scan
+        -DateTimeFormatter fmtDate
+        -DateTimeFormatter fmtTime
+        -CalendarConfig config
+        +run(Scanner scan, Calendar calendar, People people) void
+        -listAllEvents() void
+        -searchEvents() void
+        -enterNewEvent() void
+        -modifyEvent() void
+        -deleteEvent() void
+        -editEventFields(Event event) void
+        -modifyParticipants(Event event) void
+        -addParticipant(Event event) void
+        -removeParticipant(Event event) void
+        -selectAnEvent(List<Event> events) Event
+        -searchEventsByName() List<Event>
+        -searchEventsByDate() List<Event>
+    }
+
+    class PeopleUI {
+        -People people
+        -Scanner scan
+        +run(Scanner scan, People people) void
+        -listAllPeople() void
+        -searchPerson() void
+        -addPerson() void
+        -modifyPerson() void
+        -modifyPerson(Person person) void
+        -editPerson(Person person) void
+        -removePerson() void
+    }
+
+    class Calendar {
+        -List<Event> events
+        +Calendar()
+        +getAllEvents() List<Event>
+        -cmpEvents(Event e1, Event e2) int
+        +add(Event event) boolean
+        +remove(Event event) Event
+        +searchByTitle(String keyword) List<Event>
+        +searchByDate(LocalDate date) List<Event>
+        +toString() String
+    }
+
+    class Event {
+        -String title
+        -LocalDate date
+        -LocalTime startTime
+        -LocalTime endTime
+        -boolean isAllDay
+        -String location
+        -String description
+        -Map<String, Person> participants
+        -CalendarConfig config
+        -LocalTime END_OF_DAY
+        +Event()
+        +getTitle() String
+        +getDate() LocalDate
+        +getStartTime() LocalTime
+        +getEndTime() LocalTime
+        +getIsAllDay() boolean
+        +getLocation() String
+        +getDescription() String
+        +setTitle(String title) void
+        +setTitle() void
+        +setDate(LocalDate date) void
+        +setDate() void
+        +setStartTime(LocalTime startTime) void
+        +setEndTime(LocalTime endTime) void
+        +setIsAllDay(boolean isAllDay) void
+        +setIsAllDay() void
+        +setLocation(String location) void
+        +setLocation() void
+        +setDescription(String description) void
+        +setDescription() void
+        +fmtDate(String pattern) String
+        +fmtStartTime(String pattern) String
+        +fmtEndTime(String pattern) String
+        +addParticipant(Person person) boolean
+        +removeParticipant(String rut) void
+        +getParticipants() Map<String, Person>
+        +setParticipants() void
+        +toString() String
+    }
+
+    class People {
+        -Map<String, Person> people
+        +People()
+        +getPeople() Map<String, Person>
+        +add(Person person) void
+        +remove(String rut) void
+        +get(String rut) Person
+        +contains(String rut) boolean
+        +isEmpty() boolean
+        +toString() String
+    }
+
+    class Person {
+        -String rut
+        -String name
+        -String email
+        -int phone
+        +Person()
+        +getRut() String
+        +getName() String
+        +getEmail() String
+        +getPhone() int
+        +setRut(String rut) void
+        +setRut() void
+        +setName(String name) void
+        +setName() void
+        +setEmail(String email) void
+        +setEmail() void
+        +setPhone(int phone) void
+        +setPhone()void
+        +toString() String
+    }
+
+    class Config {
+        -CalendarConfig calendar
+        -String path
+        +getCalendar() CalendarConfig
+        +load() CalendarConfig
+    }
+
+    class CalendarConfig {
+        -String dateFormat
+        -String timeFormat
+        +getDateFormat() String
+        +getTimeFormat() String
+        +setDateFormat(String dateFormat) void
+        +setDateFormat() void
+        +setTimeFormat(String timeFormat) void
+        +setTimeFormat() void
+        +toString() String
+    }
+
+    %% Relationships
+    Main --> MainUI : uses
+    Main --> Calendar : creates
+    Main --> People : creates
+
+    MainUI --> CalendarUI : creates
+    MainUI --> PeopleUI : creates
+    MainUI --> Calendar : uses
+    MainUI --> People : uses
+
+    CalendarUI --> Calendar : uses
+    CalendarUI --> People : uses
+    CalendarUI --> Event : creates/modifies
+    CalendarUI --> Person : uses
+
+    PeopleUI --> People : uses
+    PeopleUI --> Person : creates/modifies
+
+    Calendar --> Event : contains
+    Calendar --> Person : uses (via Event)
+
+    Event --> Person : has participants
+    Event --> CalendarConfig : uses
+
+    People --> Person : contains
+
+    Config --> CalendarConfig : contains
+
+    %% Aggregation/composition relationships
+    Calendar *-- Event : contains
+    People *-- Person : contains
+    Event o-- Person : has participants
+    Config o-- CalendarConfig : has
+
+    %% Dependency relationships
+    CalendarUI ..> Calendar : depends on
+    CalendarUI ..> People : depends on
+    CalendarUI ..> Event : depends on
+    CalendarUI ..> Person : depends on
+    CalendarUI ..> CalendarConfig : depends on
+
+    PeopleUI ..> People : depends on
+    PeopleUI ..> Person : depends on
+
+    Event ..> CalendarConfig : depends on
+    Event ..> Person : depends on
+
+    Config ..> CalendarConfig : depends on
