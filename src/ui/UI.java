@@ -34,7 +34,7 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                    calendarUI.run(scan, calendar);
+                    calendarUI.run(scan, calendar, people);
                     break;
                 case 2: // personas
                     peopleUI.run(scan, people);
