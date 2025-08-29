@@ -63,24 +63,24 @@ public class PeopleUI {
     }
 
     private void listAllPeople() {
-        if (people.isEmpty()) {
+        if (this.people.isEmpty()) {
             System.out.println("There is no people registered.");
             return;
         }
 
         System.out.println("Listing all people:\n");
-        System.out.println(people.toString());
+        System.out.println(this.people.toString());
     }
 
     private void searchPerson() {
-        if (people.isEmpty()) {
+        if (this.people.isEmpty()) {
             System.out.println("There is no people registered.");
             return;
         }
 
         System.out.print("Enter RUT to search: ");
         String rut = scan.nextLine();
-        Person person = people.get(rut);
+        Person person = this.people.get(rut);
 
         if (person == null) {
             System.out.println("No person found with RUT: " + rut);
@@ -94,7 +94,7 @@ public class PeopleUI {
         
         try {
             this.modifyPerson(person);
-            people.add(person);
+            this.people.add(person);
             System.out.println("Person added successfully.");
         }
         catch (IllegalArgumentException e) {
@@ -105,7 +105,7 @@ public class PeopleUI {
     private void modifyPerson() {
         System.out.print("Enter RUT of the person to modify: ");
         String rut = scan.nextLine();
-        Person person = people.get(rut);
+        Person person = this.people.get(rut);
 
         if (person == null) {
             System.out.println("No person found with RUT: " + rut);
@@ -144,7 +144,7 @@ public class PeopleUI {
                     System.out.print("Enter new RUT: ");
                     String rut = scan.nextLine();
 
-                    if (people.contains(rut)) {
+                    if (this.people.contains(rut)) {
                         System.out.println("Error: a person with that RUT already exists");
                         break;
                     }
@@ -184,7 +184,7 @@ public class PeopleUI {
     private void removePerson() {
         System.out.print("Enter RUT of the person to remove: ");
         String rut = scan.nextLine();
-        Person p = people.get(rut);
+        Person p = this.people.get(rut);
 
         if (p == null) {
             System.out.println("No person found with RUT: " + rut);
@@ -196,7 +196,7 @@ public class PeopleUI {
         String confirmation = scan.nextLine();
 
         if (confirmation.strip().equalsIgnoreCase("y")) {
-            people.remove(rut);
+            this.people.remove(rut);
             System.out.println("Person removed successfully.");
         }
         else {
