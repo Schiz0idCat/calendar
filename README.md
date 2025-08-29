@@ -1,3 +1,7 @@
+El proyecto se centra en la creación de un calendario para el fácil manejo de los quehaceres diarios.
+Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calendario. El evento es el hecho puntual que le interesa al usuario recordar (inspirado en el estándar RFC-5545), mientras que el calendario colecciona y gestiona dichos eventos.
+
+Indice
 * [Instalación](#Instalación)
     * [Instrucciones](#Instrucciones)
     * [Dependencias](#Dependencias)
