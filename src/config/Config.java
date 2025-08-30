@@ -2,9 +2,9 @@ package config;
 
 import config.modules.CalendarConfig;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
-import java.io.File;
+
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 
 public class Config {
     private CalendarConfig calendar;
@@ -22,13 +22,13 @@ public class Config {
             // Config.class: clase Config, como objeto de class. Para acceder a los metadatos de la clase
             // .getClassLoader(): obtiene el ClassLoader para el siguiente método
             // .getResource(): obtiene el archivo .toml, que es conocido solo por la clase
-            URL resource = Config.class.getClassLoader().getResource(path);
+            InputStream resource = Config.class.getClassLoader().getResourceAsStream(path);
 
             if (resource == null) {
                 throw new RuntimeException("Resource not found: " + path);
             }
 
-            return tomlMapper.readValue(new File(resource.getFile()), Config.class);
+            return tomlMapper.readValue(resource, Config.class);
         }
         catch (IOException e) {
             throw new RuntimeException("Couldn't load the configuration", e);
