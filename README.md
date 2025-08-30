@@ -1,8 +1,3 @@
-Colaboradores:
-- Agustín Guzmán
-- Nicolás Leiva
-- Felipe Márquez
-
 El proyecto se centra en la creación de un calendario para el fácil manejo de los quehaceres diarios.
 
 Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calendario. El evento es el hecho puntual que le interesa al usuario recordar (inspirado en el estándar RFC-5545), mientras que el calendario colecciona y gestiona dichos eventos.
@@ -14,6 +9,7 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
     * [Ejecución](#Ejecución)
 * [Configuración](#Configuración)
     * [Calendario](#Calendario)
+* [Créditos](#Créditos) 
 
 # Instalación
 ## Instrucciones
@@ -49,3 +45,9 @@ Configuración de calendario
 dateFormat="dd-MM-yyyy" # Formato de la fecha (día-mes-año)
 timeFormat="HH:mm" # Formato de la hora (hora:minutos)
 ```
+
+# Créditos
+Este proyecto fue realizado por:
+- Agustín Guzmán (https://github.com/Schiz0idCat)
+- Nicolás Leiva (https://github.com/nico0417)
+- Felipe Márquez (https://github.com/fmarquezmu)
