@@ -11,7 +11,7 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
     * [Instrucciones](#Instrucciones)
     * [Dependencias](#Dependencias)
     * [Compilación](#Compilación)
-    * [Ejecutar](#Ejecutar)
+    * [Ejecución](#Ejecución)
 * [Configuración](#Configuración)
     * [Calendario](#Calendario)
 
@@ -32,7 +32,7 @@ mvn clean compile exec:java # ejecutar dentro de Maven
 mvn compile # solo compilar
 ```
 
-## Ejecutar
+## Ejecución
 ```
 mvn clean package # obtener el .jar
 java -jar target/calendar-1.5.0.jar # ejecutar el .jar
