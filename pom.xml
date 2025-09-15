@@ -24,6 +24,20 @@
             <version>2.18.3</version>
         </dependency>
 
+        <!-- CSV manager -->
+        <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-csv</artifactId>
+          <version>1.14.1</version>
+        </dependency>
+
+        <!-- XDG base directory specification -->
+        <dependency>
+            <groupId>net.harawata</groupId>
+            <artifactId>appdirs</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
