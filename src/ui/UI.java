@@ -1,10 +1,12 @@
 package ui;
 
+import disk.modules.CSVPeople;
 import ui.modules.CalendarUI;
 import ui.modules.PeopleUI;
 import modules.calendar.Calendar;
 import modules.people.People;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
@@ -12,6 +14,15 @@ public class UI {
         Scanner scan = new Scanner(System.in);
         CalendarUI calendarUI = new CalendarUI();
         PeopleUI peopleUI = new PeopleUI();
+        CSVPeople csvPeople;
+
+        try {
+            csvPeople = new CSVPeople("calendar");
+        } catch (IOException e) {
+            System.err.println("Failed to initialize CSVPeople: " + e.getMessage());
+            return; // salir de la UI si no se puede acceder al CSV
+        }
+
         boolean running = true;
 
         while (running) {
@@ -34,17 +45,17 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                    calendarUI.run(scan, calendar, people);
-                    break;
+                calendarUI.run(scan, calendar, people);
+                break;
                 case 2: // personas
-                    peopleUI.run(scan, people);
-                    break;
+                peopleUI.run(scan, csvPeople);
+                break;
                 case 3: // salir de la interfaz
-                    System.out.println("Goodbye.");
-                    running = false;
-                    break;
+                System.out.println("Goodbye.");
+                running = false;
+                break;
                 default:
-                    System.out.println("Invalid option, try again.");
+                System.out.println("Invalid option, try again.");
             }
         }
 
