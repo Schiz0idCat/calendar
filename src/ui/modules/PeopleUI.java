@@ -1,5 +1,6 @@
 package ui.modules;
 
+import disk.modules.CSVPeople;
 import modules.people.People;
 import modules.people.Person;
 
@@ -7,11 +8,13 @@ import java.util.Scanner;
 
 public class PeopleUI {
     private People people;
+    private CSVPeople csv;
     private Scanner scan;
 
-    public void run(Scanner scan, People people) {
-        this.people = people;
+    public void run(Scanner scan, CSVPeople csv) {
         this.scan = scan;
+        this.csv = csv;
+        this.people = csv.load(); // cargar al inicio
 
         boolean running = true;
 
@@ -95,6 +98,7 @@ public class PeopleUI {
         try {
             this.modifyPerson(person);
             this.people.add(person);
+            csv.save(people);
             System.out.println("Person added successfully.");
         }
         catch (IllegalArgumentException e) {
@@ -113,6 +117,7 @@ public class PeopleUI {
         }
 
         editPerson(person);
+        csv.save(people);
     }
 
     private void modifyPerson(Person person) {
@@ -163,7 +168,7 @@ public class PeopleUI {
                     System.out.print("Enter new phone: ");
 
                     try {
-                        int phone = Integer.parseInt(scan.nextLine());
+                        String phone = scan.nextLine();
                         person.setPhone(phone);
                     }
                     catch (NumberFormatException e) {
@@ -197,6 +202,7 @@ public class PeopleUI {
 
         if (confirmation.strip().equalsIgnoreCase("y")) {
             this.people.remove(rut);
+            csv.save(people);
             System.out.println("Person removed successfully.");
         }
         else {
