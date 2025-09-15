@@ -4,7 +4,7 @@ public class Person {
     private String rut;
     private String name;
     private String email;
-    private int phone;
+    private String phone;
 
     // Constructores
     public Person() {
@@ -16,19 +16,19 @@ public class Person {
 
     // Getters
     public String getRut() {
-        return rut;
+        return this.rut;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getPhone() {
+        return this.phone;
     }
 
     // Setters
@@ -64,12 +64,12 @@ public class Person {
         this.email = "";
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
     public void setPhone() {
-        this.phone = 0;
+        this.phone = "";
     }
 
     @Override
