@@ -1,5 +1,8 @@
 package ui.modules;
 
+import disk.modules.CSVCalendar;
+import modules.calendar.Calendar;
+import modules.calendar.Event;
 import disk.modules.CSVPeople;
 import modules.people.People;
 import modules.people.Person;
@@ -8,13 +11,17 @@ import java.util.Scanner;
 
 public class PeopleUI {
     private People people;
-    private CSVPeople csv;
+    private Calendar calendar;
+    private CSVPeople csvPeople;
+    private CSVCalendar csvCalendar;
     private Scanner scan;
 
-    public void run(Scanner scan, CSVPeople csv) {
+    public void run(Scanner scan, Calendar calendar, CSVPeople csvPeople, CSVCalendar csvCalendar) {
         this.scan = scan;
-        this.csv = csv;
-        this.people = csv.load(); // cargar al inicio
+        this.calendar = calendar;
+        this.csvPeople = csvPeople;
+        this.csvCalendar = csvCalendar;
+        this.people = csvPeople.load(); // cargar al inicio
 
         boolean running = true;
 
@@ -98,7 +105,7 @@ public class PeopleUI {
         try {
             this.modifyPerson(person);
             this.people.add(person);
-            csv.save(people);
+            csvPeople.save(people);
             System.out.println("Person added successfully.");
         }
         catch (IllegalArgumentException e) {
@@ -117,7 +124,7 @@ public class PeopleUI {
         }
 
         editPerson(person);
-        csv.save(people);
+        csvPeople.save(people);
     }
 
     private void modifyPerson(Person person) {
@@ -202,7 +209,13 @@ public class PeopleUI {
 
         if (confirmation.strip().equalsIgnoreCase("y")) {
             this.people.remove(rut);
-            csv.save(people);
+            this.csvPeople.save(people);
+
+            for (Event e : this.calendar.getAllEvents()) {
+                e.removeParticipant(rut);
+            }
+
+            this.csvCalendar.save(calendar);
             System.out.println("Person removed successfully.");
         }
         else {

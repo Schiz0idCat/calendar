@@ -3,6 +3,8 @@ package ui.modules;
 import config.Config;
 import config.modules.CalendarConfig;
 import modules.calendar.Calendar;
+import disk.modules.CSVCalendar;
+import disk.modules.CSVPeople;
 import modules.calendar.Event;
 import modules.people.People;
 import modules.people.Person;
@@ -21,13 +23,16 @@ public class CalendarUI {
     private Scanner scan;
     private DateTimeFormatter fmtDate = DateTimeFormatter.ofPattern(config.getDateFormat());
     private DateTimeFormatter fmtTime = DateTimeFormatter.ofPattern(config.getTimeFormat());
+    private CSVCalendar csv;
 
     private static final CalendarConfig config = Config.load().getCalendar();
 
-    public void run(Scanner scan, Calendar calendar, People people) {
+    public void run(Scanner scan, Calendar calendar, CSVCalendar csvCalendar, CSVPeople csvPeople) {
         this.calendar = calendar;
-        this.people = people;
+        this.people = csvPeople.load();
         this.scan = scan;
+        this.csv = csvCalendar;
+        this.calendar = csvCalendar.load();
 
         boolean running = true;
 
@@ -151,6 +156,7 @@ public class CalendarUI {
         this.editEventFields(newEvent);
 
         if (calendar.add(newEvent)) {
+            this.csv.save(calendar);
             System.out.println("Event added successfully.");
         }
         else {
@@ -205,6 +211,7 @@ public class CalendarUI {
         }
 
         this.editEventFields(eventToModify);
+        this.csv.save(calendar);
         System.out.println("Event modified successfully.");
     }
 
@@ -261,6 +268,7 @@ public class CalendarUI {
 
         if(confirmation.strip().equalsIgnoreCase("y")) {
             calendar.remove(eventToDelete);
+            this.csv.save(calendar);
             System.out.println("Event deleted successfully.");
         }
     }

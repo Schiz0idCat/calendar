@@ -1,6 +1,7 @@
 package ui;
 
 import disk.modules.CSVPeople;
+import disk.modules.CSVCalendar;
 import ui.modules.CalendarUI;
 import ui.modules.PeopleUI;
 import modules.calendar.Calendar;
@@ -15,11 +16,21 @@ public class UI {
         CalendarUI calendarUI = new CalendarUI();
         PeopleUI peopleUI = new PeopleUI();
         CSVPeople csvPeople;
+        CSVCalendar csvCalendar;
 
         try {
             csvPeople = new CSVPeople("calendar");
+            people = csvPeople.load();
         } catch (IOException e) {
             System.err.println("Failed to initialize CSVPeople: " + e.getMessage());
+            return; // salir de la UI si no se puede acceder al CSV
+        }
+
+        try {
+            csvCalendar = new CSVCalendar("calendar", people);
+            calendar = csvCalendar.load();
+        } catch (IOException e) {
+            System.err.println("Failed to initialize CSVCalnedar: " + e.getMessage());
             return; // salir de la UI si no se puede acceder al CSV
         }
 
@@ -45,10 +56,10 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                calendarUI.run(scan, calendar, people);
+                calendarUI.run(scan, calendar, csvCalendar, csvPeople);
                 break;
                 case 2: // personas
-                peopleUI.run(scan, csvPeople);
+                peopleUI.run(scan, calendar, csvPeople, csvCalendar);
                 break;
                 case 3: // salir de la interfaz
                 System.out.println("Goodbye.");
