@@ -210,7 +210,7 @@ public class Event {
 
         if (this.getParticipants().size() == 0) return event.toString();
 
-        event.append("Participants:\n");
+        event.append("\nParticipants:\n");
         for (Person person : this.getParticipants().values()) {
             event.append("- ").append(person.getName()).append(" (").append(person.getRut()).append(")\n");
         }
