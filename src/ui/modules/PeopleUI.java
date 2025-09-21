@@ -1,5 +1,6 @@
 package ui.modules;
 
+import errors.modules.people.*;
 import disk.modules.CSVCalendar;
 import modules.calendar.Calendar;
 import modules.calendar.Event;
@@ -161,15 +162,30 @@ public class PeopleUI {
                         break;
                     }
 
-                    person.setRut(rut);
+                    try {
+                        person.setRut(rut);
+                    }
+                    catch (InvalidRutException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
                 case 2:
                     System.out.print("Enter new name: ");
-                    person.setName(scan.nextLine());
+                    try {
+                        person.setName(scan.nextLine());
+                    }
+                    catch (InvalidNameException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.print("Enter new email: ");
-                    person.setEmail(scan.nextLine());
+                    try {
+                        person.setEmail(scan.nextLine());
+                    }
+                    catch (InvalidEmailException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                     break;
                 case 4:
                     System.out.print("Enter new phone: ");

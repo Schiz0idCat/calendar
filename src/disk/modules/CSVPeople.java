@@ -1,5 +1,6 @@
 package disk.modules;
 
+import errors.modules.people.*;
 import disk.FileManager;
 import modules.people.People;
 import modules.people.Person;
@@ -58,14 +59,17 @@ public class CSVPeople extends FileManager<People> {
              CSVParser csvParser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (CSVRecord record : csvParser) {
-                Person p = new Person();
-                p.setRut(record.get("rut"));
-                p.setName(record.get("name"));
-                p.setEmail(record.get("email"));
-                p.setPhone(record.get("phone"));
-                people.add(p);
+                try {
+                    Person p = new Person();
+                    p.setRut(record.get("rut"));
+                    p.setName(record.get("name"));
+                    p.setEmail(record.get("email"));
+                    p.setPhone(record.get("phone"));
+                    people.add(p);
+                } catch (InvalidRutException | InvalidNameException | InvalidEmailException e) {
+                    System.err.println("A person couldn't be read");
+                }
             }
-
         }
         catch (IOException e) {
             System.err.println("Error loading people data: " + e.getMessage());
