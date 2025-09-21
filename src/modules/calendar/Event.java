@@ -1,5 +1,6 @@
 package modules.calendar;
 
+import errors.modules.calendar.*;
 import config.Config;
 import config.modules.CalendarConfig;
 import modules.people.Person;
@@ -63,10 +64,11 @@ public class Event {
     }
 
     // Setters
-    public void setTitle(String title) {
+    public void setTitle(String title) throws InvalidTitleException {
         if (title == null || title.trim().isEmpty()){
-            throw new IllegalArgumentException("Title cannot be null or empty");
+            throw new InvalidTitleException("Title cannot be null or empty");
         }
+
         this.title = title.trim();
     }
 
@@ -74,10 +76,11 @@ public class Event {
         this.title = "default title";
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDate date) throws InvalidDateException {
         if(date == null) {
-            throw new IllegalArgumentException("Date cannot be null or empty");
+            throw new InvalidDateException("Date cannot be null or empty");
         }
+
         this.date = date;
     }
 
@@ -85,40 +88,47 @@ public class Event {
         this.date = LocalDate.now();
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(LocalTime startTime) throws InvalidTimeException {
         if(startTime == null) {
-            throw new IllegalArgumentException("Start time cannot be null for non-all-day events");
+            throw new InvalidTimeException("Start time cannot be null for non-all-day events");
         }
+
         if (this.endTime != null && startTime.isAfter(this.endTime)) {
-            throw new IllegalArgumentException("Start time cannot be after end time");
+            throw new InvalidTimeException("Start time cannot be after end time");
         }
+
         if(startTime == LocalTime.MIN && endTime == END_OF_DAY){
             this.isAllDay = true;
         }
         else {
             this.isAllDay = false;
         }
+
         this.startTime = startTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(LocalTime endTime) throws InvalidTimeException {
         if(endTime == null) {
-            throw new IllegalArgumentException("End time cannot be null for non-all-day events");
+            throw new InvalidTimeException("End time cannot be null for non-all-day events");
         }
+
         if (this.startTime != null && endTime.isBefore(this.startTime)) {
-            throw new IllegalArgumentException("End time cannot be before start time");
+            throw new InvalidTimeException("End time cannot be before start time");
         }
+
         if(endTime == END_OF_DAY && startTime == LocalTime.MIN){
             this.isAllDay = true;
         }
         else {
             this.isAllDay = false;
         }
+
         this.endTime = endTime;
     }
 
     public void setIsAllDay(boolean isAllDay) {
         this.isAllDay = isAllDay;
+
         if (isAllDay) {
             this.startTime = LocalTime.MIN;
             this.endTime = END_OF_DAY;
@@ -136,6 +146,7 @@ public class Event {
             this.location = "";
             return;
         }
+
         this.location = location.trim();
     }
 
@@ -148,6 +159,7 @@ public class Event {
             this.description = "";
             return;
         }
+
         this.description = description.trim();
     } 
 
@@ -175,13 +187,12 @@ public class Event {
     }
 
     // Participants
-    public boolean addParticipant(Person person) {
-        if (person != null) {
-            this.participants.put(person.getRut(), person);
-            return true;
+    public boolean addParticipant(Person person) throws InvalidParticipantException {
+        if (person == null) {
+            throw new InvalidParticipantException("Participant cannot be null");
         }
-
-        return false;
+        this.participants.put(person.getRut(), person);
+        return true;
     }
 
     public void removeParticipant(String rut) {
