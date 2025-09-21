@@ -1,5 +1,6 @@
 package disk.modules;
 
+import errors.modules.calendar.*;
 import config.Config;
 import config.modules.CalendarConfig;
 import disk.FileManager;
@@ -84,26 +85,38 @@ public class CSVCalendar extends FileManager<Calendar> {
              CSVParser parser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (CSVRecord record : parser) {
-                Event e = new Event();
-                e.setTitle(record.get("title"));
-                e.setDate(LocalDate.parse(record.get("date"), dateFmt));
-                e.setStartTime(LocalTime.parse(record.get("startTime"), timeFmt));
-                e.setEndTime(LocalTime.parse(record.get("endTime"), timeFmt));
-                e.setIsAllDay(Boolean.parseBoolean(record.get("isAllDay")));
-                e.setLocation(record.get("location"));
-                e.setDescription(record.get("description"));
+                try {
+                    Event e = new Event();
 
-                // Se cargan los participantes verificando que aún existan en People
-                String[] participantRuts = record.get("participants").split(";");
-                for (String rut : participantRuts) {
-                    if (people.contains(rut)) {
-                        e.addParticipant(people.get(rut));
+                    e.setTitle(record.get("title"));
+                    e.setDate(LocalDate.parse(record.get("date"), dateFmt));
+                    e.setStartTime(LocalTime.parse(record.get("startTime"), timeFmt));
+                    e.setEndTime(LocalTime.parse(record.get("endTime"), timeFmt));
+                    e.setIsAllDay(Boolean.parseBoolean(record.get("isAllDay")));
+                    e.setLocation(record.get("location"));
+                    e.setDescription(record.get("description"));
+
+                    String[] participantRuts = record.get("participants").split(";");
+                    for (String rut : participantRuts) {
+                        if (people.contains(rut)) {
+                            try {
+                                e.addParticipant(people.get(rut));
+                            }
+                            catch (InvalidParticipantException ex) {
+                                // no se avisa del error
+                                // se presume que fue eliminado intencionadamente
+                            }
+                        }
                     }
+
+                    // El evento se agrega si ninguna función falló
+                    calendar.add(e);
                 }
-
-                calendar.add(e);
+                catch (InvalidTitleException | InvalidDateException | InvalidTimeException ex) {
+                    // Si hay error al leer un evento, no se carga en memoria
+                    System.err.println("Skipping invalid event from CSV: " + ex.getMessage());
+                }
             }
-
         }
         catch (IOException ex) {
             System.err.println("Error loading calendar data: " + ex.getMessage());

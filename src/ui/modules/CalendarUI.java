@@ -5,6 +5,7 @@ import config.modules.CalendarConfig;
 import modules.calendar.Calendar;
 import disk.modules.CSVCalendar;
 import disk.modules.CSVPeople;
+import errors.modules.calendar.*;
 import modules.calendar.Event;
 import modules.people.People;
 import modules.people.Person;
@@ -315,7 +316,7 @@ public class CalendarUI {
                     try {
                         event.setTitle(title);
                     }
-                    catch (IllegalArgumentException e) {
+                    catch (InvalidTitleException e) {
                         System.out.println("Error: " + e.getMessage());
                     }
 
@@ -330,7 +331,7 @@ public class CalendarUI {
                         date = LocalDate.parse(strDate, formatter);
                         event.setDate(date);
                     }
-                    catch (DateTimeParseException e) {
+                    catch (InvalidDateException e) {
                         System.out.println("Invalid date. The format is: " + config.getDateFormat());
                     }
 
@@ -343,7 +344,7 @@ public class CalendarUI {
                         LocalTime startTime = LocalTime.parse(strStartTime, this.fmtTime);
                         event.setStartTime(startTime);
                     }
-                    catch (DateTimeParseException e) {
+                    catch (InvalidTimeException e) {
                         System.out.println("Time format incorrect. The format is: " + config.getTimeFormat());
                     }
 
@@ -356,7 +357,7 @@ public class CalendarUI {
                         LocalTime endTime = LocalTime.parse(strEndTime, this.fmtTime);
                         event.setEndTime(endTime);
                     }
-                    catch (DateTimeParseException e) {
+                    catch (InvalidTimeException e) {
                         System.out.println("Time format incorrect. The format is: " + config.getTimeFormat());
                     }
 
@@ -456,8 +457,13 @@ public class CalendarUI {
         Person person = people.get(rut);
 
         if (person != null) {
-            event.addParticipant(person);
-            System.out.println("Participant added: " + person.getName());
+            try {
+                event.addParticipant(person);
+                System.out.println("Participant added: " + person.getName());
+            }
+            catch (InvalidParticipantException e) {
+                System.out.println("Error adding participant: " + e.getMessage());
+            }
         }
         else {
             System.out.println("No person found with RUT: " + rut);
