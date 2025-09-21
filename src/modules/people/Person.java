@@ -1,5 +1,7 @@
 package modules.people;
 
+import errors.modules.people.*;
+
 public class Person {
     private String rut;
     private String name;
@@ -32,9 +34,9 @@ public class Person {
     }
 
     // Setters
-    public void setRut(String rut) {
-        if (rut == null) throw new IllegalArgumentException("rut cannot be null");
-        if (rut.isEmpty()) throw new IllegalArgumentException("rut cannot be empty");
+    public void setRut(String rut) throws InvalidRutException {
+        if (rut == null) throw new InvalidRutException("rut cannot be null");
+        if (rut.isEmpty()) throw new InvalidRutException("rut cannot be empty");
 
         this.rut = rut;
     }
@@ -43,9 +45,9 @@ public class Person {
         this.rut = "12.345.678-9";
     }
 
-    public void setName(String name) {
-        if (name == null) throw new IllegalArgumentException("name cannot be null");
-        if (name.isEmpty()) throw new IllegalArgumentException("name cannot be empty");
+    public void setName(String name) throws InvalidNameException {
+        if (name == null) throw new InvalidNameException("name cannot be null");
+        if (name.isEmpty()) throw new InvalidNameException("name cannot be empty");
 
         this.name = name;
     }
@@ -54,8 +56,8 @@ public class Person {
         this.name = "name";
     }
 
-    public void setEmail(String email) {
-        if (email == null) throw new IllegalArgumentException("email cannot be null");
+    public void setEmail(String email) throws InvalidEmailException {
+        if (email == null) throw new InvalidEmailException("email cannot be null");
 
         this.email = email;
     }
