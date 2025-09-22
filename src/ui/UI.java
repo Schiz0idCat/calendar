@@ -41,7 +41,8 @@ public class UI {
             System.out.println("What do you want to do?");
             System.out.println("1. Calendar.");
             System.out.println("2. People.");
-            System.out.println("3. Exit.");
+            System.out.println("3. Export data to CSV");
+            System.out.println("4. Exit");
             System.out.print("Select an option: ");
 
             int option;
@@ -56,17 +57,26 @@ public class UI {
 
             switch (option) {
                 case 1: // calendario
-                calendarUI.run(scan, calendar, csvCalendar, csvPeople);
-                break;
+                    calendarUI.run(scan, calendar, csvCalendar, csvPeople);
+                    break;
                 case 2: // personas
-                peopleUI.run(scan, calendar, csvPeople, csvCalendar);
-                break;
-                case 3: // salir de la interfaz
-                System.out.println("Goodbye.");
-                running = false;
-                break;
+                    peopleUI.run(scan, calendar, csvPeople, csvCalendar);
+                    break;
+                case 3: // exportar
+                    try {
+                        csvPeople.export(people);
+                        csvCalendar.export(calendar);
+                        System.out.println("Data exported successfully!");
+                    } catch (IOException e) {
+                        System.err.println("Export failed: " + e.getMessage());
+                    }
+                    break;
+                case 4: // salir de la interfaz
+                    System.out.println("Goodbye.");
+                    running = false;
+                    break;
                 default:
-                System.out.println("Invalid option, try again.");
+                    System.out.println("Invalid option, try again.");
             }
         }
 
