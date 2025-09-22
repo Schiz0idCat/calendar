@@ -9,6 +9,11 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
     * [Ejecución](#Ejecución)
 * [Configuración](#Configuración)
     * [Calendario](#Calendario)
+* [Uso](#Uso)
+    * [Interfaz](#Interfaz)
+        * [TUI](#TUI)
+        * [GUI](#GUI)
+    * [Manejo de Archivos](#Manejo-de-Archivos)
 * [Créditos](#Créditos) 
 
 # Instalación
@@ -45,6 +50,29 @@ Configuración de calendario
 dateFormat="dd-MM-yyyy" # Formato de la fecha (día-mes-año)
 timeFormat="HH:mm" # Formato de la hora (hora:minutos)
 ```
+
+# Uso
+## Interfaz
+### TUI
+Una de las alternativas para interactuar con nuestro software es la Terminal User Interface.
+Minimalista y directa.
+
+### GUI
+Además, está la Graphical User Interface para una experiencia más amigable a la vista
+
+## Manejo de Archivos
+Dado que la app respeta la [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/), los archivos generados por esta se guardan en diferentes directorios dependiendo del sistema.
+
+La base de datos no relacional para los eventos del calendario y las personas registradas en el sistema se guardan en:
+
+```
+On Mac OS X : /Users/<Account>/Library/Application Support/<AppName>
+On Windows XP : C:\Documents and Settings\<Account>\Application Data\Local Settings\<AppAuthor>\<AppName>
+On Windows vista or later : C:\Users\<Account>\AppData\<AppAuthor>\<AppName>
+On Unix/Linux : /home/<account>/.local/share/<AppName>
+```
+
+Para más detalle revisar la dependencia usada [acá](https://github.com/harawata/appdirs)
 
 # Créditos
 Este proyecto fue realizado por:
