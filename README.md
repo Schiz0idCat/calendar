@@ -40,10 +40,10 @@ java -jar target/calendar-1.5.0.jar # ejecutar el .jar
 ```
 
 # Configuración
-La configuración se almacena en [settings.toml](./resources/settings.toml)
+La configuración se almacena en [settings.toml](./resources/settings.toml).
 
 ## Calendario
-Configuración de calendario
+Configuración de calendario.
 
 ```toml
 [calendar]
@@ -58,7 +58,7 @@ Una de las alternativas para interactuar con nuestro software es la Terminal Use
 Minimalista y directa.
 
 ### GUI
-Además, está la Graphical User Interface para una experiencia más amigable a la vista
+Además, está la Graphical User Interface para una experiencia más amigable a la vista.
 
 ## Manejo de Archivos
 Dado que la app respeta la [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/), los archivos generados por esta se guardan en diferentes directorios dependiendo del sistema.
@@ -72,10 +72,10 @@ On Windows vista or later : C:\Users\<Account>\AppData\<AppAuthor>\<AppName>
 On Unix/Linux : /home/<account>/.local/share/<AppName>
 ```
 
-Para más detalle revisar la dependencia usada [acá](https://github.com/harawata/appdirs)
+Para más detalle revisar la dependencia usada [acá](https://github.com/harawata/appdirs).
 
 # Créditos
 Este proyecto fue realizado por:
-- Agustín Guzmán (https://github.com/Schiz0idCat)
-- Nicolás Leiva (https://github.com/nico0417)
-- Felipe Márquez (https://github.com/fmarquezmu)
+- Agustín Guzmán [[GitHub](https://github.com/Schiz0idCat)]
+- Nicolás Leiva [[GitHub](https://github.com/nico0417)]
+- Felipe Márquez [[GitHub](https://github.com/fmarquezmu)]
