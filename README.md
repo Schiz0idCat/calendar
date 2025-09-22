@@ -3,7 +3,7 @@ El proyecto se centra en la creación de un calendario para el fácil manejo de 
 Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calendario. El evento es el hecho puntual que le interesa al usuario recordar (inspirado en el estándar RFC-5545), mientras que el calendario colecciona y gestiona dichos eventos.
 
 * [Instalación](#Instalación)
-    * [Instrucciones](#Instrucciones)
+    * [Descarga](#Descarga)
     * [Dependencias](#Dependencias)
     * [Compilación](#Compilación)
     * [Ejecución](#Ejecución)
@@ -17,7 +17,7 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
 * [Créditos](#Créditos) 
 
 # Instalación
-## Instrucciones
+## Descarga
 ```
 git clone https://www.github.com/schiz0idcat/calendar.git calendar
 cd calendar
