@@ -138,7 +138,22 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
+    
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+        // CalendarPanel está declarado como calendarPanel1
+            if (calendarPanel1 != null) {
+                calendarPanel1.saveCalendar();
+            }
+        // peoplePanel2 es el panel real que contiene la data (según initComponents se instancia peoplePanel1 y peoplePanel2)
+            if (peoplePanel2 != null) {
+                peoplePanel2.savePeople();
+            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Datos guardados correctamente.");
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al intentar guardar: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+}
     /**
      * @param args the command line arguments
      */
@@ -175,23 +190,16 @@ public class CalendarMainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private ui.gui.CalendarPanel calendarPanel1;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private ui.gui.PeoplePanel peoplePanel1;
     private ui.gui.PeoplePanel peoplePanel2;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
