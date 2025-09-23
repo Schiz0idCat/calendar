@@ -17,6 +17,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.awt.Dimension;
 
 /**
  *
@@ -521,7 +522,7 @@ public class EventDialog extends javax.swing.JDialog {
         }
     }
     
-    private void updatePeopleComboBox() {
+    /*private void updatePeopleComboBox() {
         jComboBox1.removeAllItems();
         
         for (Person person : people.getPeople().values()) {
@@ -530,9 +531,24 @@ public class EventDialog extends javax.swing.JDialog {
                 jComboBox1.addItem(person.getName() + " (" + person.getRut() + ")");
             }
         }
+    }*/
+    private void updatePeopleComboBox() {
+        jComboBox1.removeAllItems();
+
+        for (Person person : people.getPeople().values()) {
+        // Only add people who are not already participants
+            if (!event.getParticipants().containsKey(person.getRut())) {
+                jComboBox1.addItem(person.getName() + " (" + person.getRut() + ")");
+            }
+        }
+        //layut
+        jComboBox1.revalidate();
+        jComboBox1.repaint();
+        getContentPane().revalidate();
+        getContentPane().repaint();
     }
     
-    private void updateParticipantList() {
+    /*private void updateParticipantList() {
         List<String> participantList = new ArrayList<>();
         
         for (Person person : event.getParticipants().values()) {
@@ -540,7 +556,33 @@ public class EventDialog extends javax.swing.JDialog {
         }
         
         jList1.setListData(participantList.toArray(new String[0]));
-    }
+    }*/
+    private void updateParticipantList() {
+        List<String> participantList = new ArrayList<>();
+
+        for (Person person : event.getParticipants().values()) {
+            participantList.add(person.getName() + " (" + person.getRut() + ")");
+        }
+
+    // Actualiza el JList
+        jList1.setListData(participantList.toArray(new String[0]));
+
+    // Mantener un tamaño estable del JScrollPane para que GridBagLayout no "estire" otros controles.
+    // Usa un ancho parecido al ipadx que estaba en el diseño (312) y una altura razonable.
+        jScrollPane2.setPreferredSize(new Dimension(312, 100));
+
+    // Forzar re-layout visual
+    /*
+        jScrollPane2.revalidate();
+        jScrollPane2.repaint();
+        getContentPane().revalidate();
+        getContentPane().repaint();
+    */
+        jScrollPane2.revalidate();
+        jScrollPane2.repaint();
+        getContentPane().revalidate();
+        getContentPane().repaint();
+}
     
     /**
      * @param args the command line arguments

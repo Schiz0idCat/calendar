@@ -308,7 +308,7 @@ public class PeoplePanel extends javax.swing.JPanel {
     }
     
     // Save people data
-    private void savePeople() {
+    public void savePeople() {
         try {
             if (csvPeople != null && people != null) {
                 csvPeople.save(people);
