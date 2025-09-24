@@ -52,6 +52,4 @@ public abstract class FileManager<T> {
     public abstract void save(T data);
 
     public abstract T load();
-
-    public abstract void export(T data) throws IOException;
 }
