@@ -6,6 +6,7 @@ import ui.modules.CalendarUI;
 import ui.modules.PeopleUI;
 import modules.calendar.Calendar;
 import modules.people.People;
+import ui.gui.CalendarMainForm;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -42,7 +43,8 @@ public class UI {
             System.out.println("1. Calendar.");
             System.out.println("2. People.");
             System.out.println("3. Export data to CSV");
-            System.out.println("4. Exit");
+            System.out.println("4. run gui");
+            System.out.println("5. Exit");
             System.out.print("Select an option: ");
 
             int option;
@@ -70,6 +72,9 @@ public class UI {
                     } catch (IOException e) {
                         System.err.println("Export failed: " + e.getMessage());
                     }
+                    break;
+                case 5: // correr la gui
+                    CalendarMainForm.run();
                     break;
                 case 4: // salir de la interfaz
                     System.out.println("Goodbye.");
