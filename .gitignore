@@ -1,5 +1,7 @@
 target/
 
+./report.txt
+
 .classpath
 .project
 .settings/
