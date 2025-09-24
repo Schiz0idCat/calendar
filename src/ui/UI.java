@@ -6,6 +6,7 @@ import ui.modules.CalendarUI;
 import ui.modules.PeopleUI;
 import modules.calendar.Calendar;
 import modules.people.People;
+import utils.Report;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -42,7 +43,8 @@ public class UI {
             System.out.println("1. Calendar.");
             System.out.println("2. People.");
             System.out.println("3. Export data to CSV");
-            System.out.println("4. Exit");
+            System.out.println("4. Generate a report.");
+            System.out.println("5. Exit.");
             System.out.print("Select an option: ");
 
             int option;
@@ -72,6 +74,14 @@ public class UI {
                     }
                     break;
                 case 4: // salir de la interfaz
+                    try {
+                        Report.generate(people, calendar);
+                        System.out.println("System report generated successfully!");
+                    } catch (IOException e) {
+                        System.err.println("Failed to generate report: " + e.getMessage());
+                    }
+                    break;
+                case 5: // salir de la interfaz
                     System.out.println("Goodbye.");
                     running = false;
                     break;
