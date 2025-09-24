@@ -1,6 +1,6 @@
 target/
 
-./report.txt
+report.txt
 
 .classpath
 .project
