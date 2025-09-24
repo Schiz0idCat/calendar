@@ -1,4 +1,4 @@
-package ui.modules;
+package ui.TUI.modules;
 
 import config.Config;
 import config.modules.CalendarConfig;

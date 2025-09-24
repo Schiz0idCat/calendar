@@ -1,4 +1,4 @@
-package ui.modules;
+package ui.TUI.modules;
 
 import errors.modules.people.*;
 import disk.modules.CSVCalendar;
