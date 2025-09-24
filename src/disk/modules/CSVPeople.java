@@ -14,7 +14,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class CSVPeople extends FileManager<People> {
     private static final CSVFormat READ_FORMAT = CSVFormat.DEFAULT.builder()
@@ -77,20 +76,5 @@ public class CSVPeople extends FileManager<People> {
         }
 
         return people;
-    }
-
-    @Override
-    public void export(People people) throws IOException {
-        Path exportPath = Path.of("people_export.csv"); // directorio actual de trabajo
-
-        try (BufferedWriter writer = Files.newBufferedWriter(exportPath);
-        CSVPrinter csvPrinter = new CSVPrinter(writer, WRITE_FORMAT)) {
-
-            for (Person p : people.getPeople().values()) {
-                csvPrinter.printRecord(p.getRut(), p.getName(), p.getEmail(), p.getPhone());
-            }
-
-            System.out.println("People exported to: " + exportPath.toAbsolutePath());
-        }
     }
 }

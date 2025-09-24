@@ -17,7 +17,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -124,33 +123,5 @@ public class CSVCalendar extends FileManager<Calendar> {
         }
 
         return calendar;
-    }
-
-    @Override
-    public void export(Calendar calendar) throws IOException {
-        Path exportPath = Path.of("calendar_export.csv"); // directorio actual de trabajo
-        DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern(config.getDateFormat());
-        DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(config.getTimeFormat());
-
-        try (BufferedWriter writer = Files.newBufferedWriter(exportPath);
-        CSVPrinter csvPrinter = new CSVPrinter(writer, WRITE_FORMAT)) {
-
-            for (Event e : calendar.getAllEvents()) {
-                String participants = String.join(";", e.getParticipants().keySet());
-
-                csvPrinter.printRecord(
-                    e.getTitle(),
-                    e.getDate().format(dateFmt),
-                    e.getStartTime().format(timeFmt),
-                    e.getEndTime().format(timeFmt),
-                    e.getIsAllDay(),
-                    e.getLocation(),
-                    e.getDescription(),
-                    participants
-                );
-            }
-
-            System.out.println("Calendar exported to: " + exportPath.toAbsolutePath());
-        }
     }
 }
