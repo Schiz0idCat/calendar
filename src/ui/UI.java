@@ -73,10 +73,10 @@ public class UI {
                         System.err.println("Export failed: " + e.getMessage());
                     }
                     break;
-                case 5: // correr la gui
+                case 4: // correr la gui
                     CalendarMainForm.run();
                     break;
-                case 4: // salir de la interfaz
+                case 5: // salir de la interfaz
                     System.out.println("Goodbye.");
                     running = false;
                     break;
