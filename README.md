@@ -10,6 +10,8 @@ Esto se logra haciendo concretos dos conceptos abstractos: El evento y el calend
 * [Configuración](#Configuración)
     * [Calendario](#Calendario)
 * [Uso](#Uso)
+    * [Instrucciones](#Instrucciones)
+        * [Ejemplos](#Ejemplos)
     * [Interfaz](#Interfaz)
         * [TUI](#TUI)
         * [GUI](#GUI)
@@ -29,14 +31,15 @@ cd calendar
 
 ## Compilación
 ```
-mvn clean compile exec:java # ejecutar dentro de Maven
 mvn compile # solo compilar
+mvn clean compile exec:java # ejecutar dentro de maven (corre la gui por defecto)
+mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="{ARGUMENT}" # ejecutar dentro de maven especificando el argumento
 ```
 
 ## Ejecución
 ```
 mvn clean package # obtener el .jar
-java -jar target/calendar-1.5.0.jar # ejecutar el .jar
+java -jar target/calendar-1.5.0.jar {ARGUMENTO} # ejecutar el .jar
 ```
 
 # Configuración
@@ -52,6 +55,38 @@ timeFormat="HH:mm" # Formato de la hora (hora:minutos)
 ```
 
 # Uso
+## Instrucciones
+El flujo inicial del programa lo administra la CLI.
+Esta recive 3 argumentos válidos:
+- *nada*: si no se le pasa ningún argumento, el programa ejecuta la GUI.
+- gui: ejecuta la GUI.
+- tui: ejecuta la TUI.
+
+En caso de pasar un argumento inválido, el programa imprime una alerta por consola.
+
+### Ejemplos
+Acá algunos ejemplos de las formas de ejecutar el programa.
+
+```
+#=====> DESDE MAVEN <=====#
+# GUI
+mvn exec:java
+mvn exec:java -Dexec.mainClass="Main.java"
+mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args=""
+mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="gui"
+
+# TUI
+mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="tui"
+
+#=====> DESDE JAVA <=====#
+# GUI
+java -jar target/calendar-1.5.0.jar
+java -jar target/calendar-1.5.0.jar gui
+
+# TUI
+java -jar target/calendar-1.5.0.jar tui
+```
+
 ## Interfaz
 ### TUI
 Una de las alternativas para interactuar con nuestro software es la Terminal User Interface.
