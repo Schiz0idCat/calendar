@@ -42,9 +42,8 @@ public class UI {
             System.out.println("What do you want to do?");
             System.out.println("1. Calendar.");
             System.out.println("2. People.");
-            System.out.println("3. Export data to CSV");
-            System.out.println("4. Generate a report.");
-            System.out.println("5. Exit.");
+            System.out.println("3. Generate a report.");
+            System.out.println("4. Exit.");
             System.out.print("Select an option: ");
 
             int option;
@@ -64,16 +63,7 @@ public class UI {
                 case 2: // personas
                     peopleUI.run(scan, calendar, csvPeople, csvCalendar);
                     break;
-                case 3: // exportar
-                    try {
-                        csvPeople.export(people);
-                        csvCalendar.export(calendar);
-                        System.out.println("Data exported successfully!");
-                    } catch (IOException e) {
-                        System.err.println("Export failed: " + e.getMessage());
-                    }
-                    break;
-                case 4: // salir de la interfaz
+                case 3: // salir de la interfaz
                     try {
                         Report.generate(people, calendar);
                         System.out.println("System report generated successfully!");
@@ -81,7 +71,7 @@ public class UI {
                         System.err.println("Failed to generate report: " + e.getMessage());
                     }
                     break;
-                case 5: // salir de la interfaz
+                case 4: // salir de la interfaz
                     System.out.println("Goodbye.");
                     running = false;
                     break;
