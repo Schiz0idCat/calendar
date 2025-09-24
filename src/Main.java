@@ -1,4 +1,4 @@
-import ui.UI;
+import ui.CLI.MainCLI;
 import modules.calendar.Calendar;
 import modules.people.People;
 
@@ -7,6 +7,6 @@ public class Main {
         final Calendar calendar = new Calendar();
         final People people = new People();
 
-        UI.run(calendar, people);
+        MainCLI.run(args, calendar, people);
     }
 }
