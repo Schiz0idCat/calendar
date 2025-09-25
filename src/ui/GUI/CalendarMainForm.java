@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
-package ui.gui;
+package ui.GUI;
 
 /**
  *
@@ -28,9 +28,9 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        calendarPanel1 = new ui.gui.CalendarPanel();
-        peoplePanel1 = new ui.gui.PeoplePanel();
-        peoplePanel2 = new ui.gui.PeoplePanel();
+        calendarPanel1 = new ui.GUI.CalendarPanel();
+        peoplePanel1 = new ui.GUI.PeoplePanel();
+        peoplePanel2 = new ui.GUI.PeoplePanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();

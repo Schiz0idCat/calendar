@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.gui;
+package ui.GUI;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
@@ -15,11 +15,9 @@ import disk.modules.CSVPeople;
 import config.Config;
 import config.modules.CalendarConfig;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 /**
  *
@@ -33,7 +31,6 @@ public class CalendarPanel extends javax.swing.JPanel {
     private CSVPeople csvPeople;
     private static final CalendarConfig config = Config.load().getCalendar();
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(config.getDateFormat());
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(config.getTimeFormat());
     /**
      * Creates new form CalendarPanel
      */

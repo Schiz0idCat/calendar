@@ -1,4 +1,4 @@
-package ui.gui;
+package ui.GUI;
 
 import modules.calendar.Calendar;
 import modules.people.People;
