@@ -203,7 +203,7 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private ui.gui.CalendarPanel calendarPanel1;
+    private ui.GUI.CalendarPanel calendarPanel1;
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
@@ -216,10 +216,11 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
-    private ui.gui.PeoplePanel peoplePanel1;
-    private ui.gui.PeoplePanel peoplePanel2;
+    private ui.GUI.PeoplePanel peoplePanel1;
+    private ui.GUI.PeoplePanel peoplePanel2;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
+
