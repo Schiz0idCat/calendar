@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import java.awt.Dimension;
-
+//no se pq no puedo hacer un commit como fukin persona ekisde uwu esto luego se va a borrar
 /**
  *
  * @author Felipe Márquez
