@@ -12,11 +12,15 @@ public abstract class FileManager<T> {
         CONFIG, DATA
     }
 
-    protected final Path filePath;
+    private Path filePath;
 
     public FileManager(String appName, String fileName, FileType fileType) throws IOException {
         this.filePath = getDefaultPath(appName, fileName, fileType);
         createFileIfNotExists();
+    }
+
+    public Path getFilePath() {
+        return this.filePath;
     }
 
     private static Path getDefaultPath(String appName, String fileName, FileType fileType) throws IOException {
