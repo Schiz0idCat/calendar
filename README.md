@@ -36,7 +36,7 @@ cd calendar
 ```
 mvn compile # solo compilar
 mvn clean compile exec:java # ejecutar dentro de maven (corre la gui por defecto)
-mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="{ARGUMENT}" # ejecutar dentro de maven especificando el argumento
+mvn exec:java -Dexec.args="{ARGUMENT}" # ejecutar dentro de maven especificando el argumento
 ```
 
 ## Ejecución
@@ -74,12 +74,11 @@ Acá algunos ejemplos de las formas de ejecutar el programa.
 #=====> DESDE MAVEN <=====#
 # GUI
 mvn exec:java
-mvn exec:java -Dexec.mainClass="Main.java"
-mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args=""
-mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="gui"
+mvn exec:java -Dexec.args=""
+mvn exec:java -Dexec.args="gui"
 
 # TUI
-mvn exec:java -Dexec.mainClass="Main.java" -Dexec.args="tui"
+mvn exec:java -Dexec.args="tui"
 
 #=====> DESDE JAVA <=====#
 # GUI
