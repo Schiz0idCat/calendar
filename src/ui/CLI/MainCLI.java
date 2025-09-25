@@ -9,7 +9,6 @@ public class MainCLI {
     public static void run(String[] args, Calendar calendar, People people) {
         if (args.length == 0) {
             MainGUI.run(calendar, people);
-            System.out.println("Running the GUI...");
             return;
         }
 
@@ -19,7 +18,6 @@ public class MainCLI {
                 break;
             case "gui":
                 MainGUI.run(calendar, people);
-                System.out.println("Running the GUI...");
                 break;
             default:
                 System.err.println("Unrecognize command: " + args[0]);
