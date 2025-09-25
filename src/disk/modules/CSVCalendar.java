@@ -49,7 +49,7 @@ public class CSVCalendar extends FileManager<Calendar> {
         DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern(config.getDateFormat());
         DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(config.getTimeFormat());
 
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath);
+        try (BufferedWriter writer = Files.newBufferedWriter(this.getFilePath());
              CSVPrinter csvPrinter = new CSVPrinter(writer, WRITE_FORMAT)) {
 
             for (Event e : calendar.getAllEvents()) {
@@ -79,9 +79,9 @@ public class CSVCalendar extends FileManager<Calendar> {
         DateTimeFormatter dateFmt = DateTimeFormatter.ofPattern(config.getDateFormat());
         DateTimeFormatter timeFmt = DateTimeFormatter.ofPattern(config.getTimeFormat());
 
-        if (!Files.exists(filePath)) return calendar;
+        if (!Files.exists(this.getFilePath())) return calendar;
 
-        try (Reader reader = Files.newBufferedReader(filePath);
+        try (Reader reader = Files.newBufferedReader(this.getFilePath());
              CSVParser parser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (CSVRecord record : parser) {

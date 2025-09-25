@@ -36,7 +36,7 @@ public class CSVPeople extends FileManager<People> {
 
     @Override
     public void save(People people) {
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath);
+        try (BufferedWriter writer = Files.newBufferedWriter(this.getFilePath());
              CSVPrinter csvPrinter = new CSVPrinter(writer, WRITE_FORMAT)) {
 
             for (Person p : people.getPeople().values()) {
@@ -53,9 +53,9 @@ public class CSVPeople extends FileManager<People> {
     public People load() {
         People people = new People();
 
-        if (!Files.exists(filePath)) return people;
+        if (!Files.exists(this.getFilePath())) return people;
 
-        try (Reader reader = Files.newBufferedReader(filePath);
+        try (Reader reader = Files.newBufferedReader(this.getFilePath());
              CSVParser csvParser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (CSVRecord record : csvParser) {
