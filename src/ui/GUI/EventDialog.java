@@ -17,6 +17,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultListModel;
+import java.awt.Dimension;
 
 /**
  *
@@ -74,6 +76,14 @@ public class EventDialog extends javax.swing.JDialog {
      */
     private void setupDialog() {
         setTitle(isEditMode ? "Edit Event" : "Add New Event");
+        if (!(jList1.getModel() instanceof DefaultListModel)) {
+        jList1.setModel(new DefaultListModel<String>());
+        }
+        // Estabilizar tamaño y celdas para que GridBagLayout no reacomode los textfields
+        jList1.setVisibleRowCount(5);
+        jList1.setFixedCellHeight(20);
+        jList1.setFixedCellWidth(280);
+        jScrollPane2.setPreferredSize(new Dimension(312, 120));
         
         // Populate people combo box
         updatePeopleComboBox();
@@ -456,6 +466,7 @@ public class EventDialog extends javax.swing.JDialog {
         updateParticipantList();
         updatePeopleComboBox(); // Add removed person back to combo box
     }//GEN-LAST:event_removeParticipantActionPerformed
+    
     private boolean validateAndSetEventData() {
         try {
             // Validate title
@@ -527,13 +538,24 @@ public class EventDialog extends javax.swing.JDialog {
     }
     
     private void updateParticipantList() {
-        List<String> participantList = new ArrayList<>();
-        
-        for (Person person : event.getParticipants().values()) {
-            participantList.add(person.getName() + " (" + person.getRut() + ")");
-        }
-        
-        jList1.setListData(participantList.toArray(new String[0]));
+    DefaultListModel<String> model = (DefaultListModel<String>) jList1.getModel();
+    model.clear();
+
+    for (Person person : event.getParticipants().values()) {
+        model.addElement(person.getName() + " (" + person.getRut() + ")");
+    }
+
+    // Ajustes visuales para mantener layout estable
+    int rows = Math.max(1, Math.min(8, model.getSize()));
+    jList1.setVisibleRowCount(rows);
+    jScrollPane2.setPreferredSize(new Dimension(312, rows * 20 + 10));
+
+    jScrollPane2.revalidate();
+    jScrollPane2.repaint();
+    jList1.revalidate();
+    jList1.repaint();
+    getContentPane().revalidate();
+    getContentPane().repaint();
     }
     
     /**
