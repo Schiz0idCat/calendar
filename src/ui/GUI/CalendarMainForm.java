@@ -205,6 +205,9 @@ public class CalendarMainForm extends javax.swing.JFrame {
                 // Pass the updated data to the panel to refresh the table
                 weatherPanel1.setData(this.sharedWeather, this.sharedCsvWeather);
                 
+                System.out.println("Saving new data to default file...");
+                sharedCsvWeather.save(this.sharedWeather);
+                
                 javax.swing.JOptionPane.showMessageDialog(this, 
                     "Weather file imported successfully.", 
                     "Import Successful", 
