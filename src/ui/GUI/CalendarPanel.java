@@ -445,7 +445,7 @@ public class CalendarPanel extends javax.swing.JPanel {
     }
     
     // Save calendar data
-    private void saveCalendar() {
+    public void saveCalendar() {
         try {
             if (csvCalendar != null && calendar != null) {
                 csvCalendar.save(calendar);

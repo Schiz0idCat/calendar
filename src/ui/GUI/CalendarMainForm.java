@@ -3,10 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 package ui.GUI;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Felipe Márquez
+ * @author Felipe Márquez, Nicolas Leiva
  */
 public class CalendarMainForm extends javax.swing.JFrame {
 
@@ -31,20 +35,14 @@ public class CalendarMainForm extends javax.swing.JFrame {
         calendarPanel1 = new ui.GUI.CalendarPanel();
         peoplePanel1 = new ui.GUI.PeoplePanel();
         peoplePanel2 = new ui.GUI.PeoplePanel();
+        weatherPanel1 = new ui.GUI.WeatherPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,22 +53,42 @@ public class CalendarMainForm extends javax.swing.JFrame {
         peoplePanel1.add(peoplePanel2, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("People", peoplePanel1);
+        
+        jTabbedPane1.addTab("Weather", weatherPanel1);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Save");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    if (calendarPanel1 != null) {
+                        calendarPanel1.saveCalendar();
+                    }
+                    if (peoplePanel2 != null) {
+                        peoplePanel2.savePeople();
+                    }
+                    if (weatherPanel1 != null) {
+                        weatherPanel1.saveWeather();
+                    }
+                    javax.swing.JOptionPane.showMessageDialog(CalendarMainForm.this, "Datos guardados correctamente.");
+                } catch (Exception e) {
+                    javax.swing.JOptionPane.showMessageDialog(CalendarMainForm.this, "Error al intentar guardar: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -83,38 +101,31 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
         helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
+        jMenuItem1.setText("Help");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    if (java.awt.Desktop.isDesktopSupported()) {
+                        java.awt.Desktop.getDesktop().browse(new java.net.URI(
+                            "https://github.com/schiz0idcat/calendar"));
+                    } 
+                    else {
+                        javax.swing.JOptionPane.showMessageDialog(
+                            CalendarMainForm.this,
+                            "Unable to open browser on this platform.");
+                    }
+                }catch (Exception e) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                        CalendarMainForm.this,
+                        "Error opening link: " + e.getMessage(),
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        helpMenu.add(jMenuItem1);
         menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
@@ -138,8 +149,10 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
     private modules.calendar.Calendar sharedCalendar;
     private modules.people.People sharedPeople;
+    private modules.weather.Weather sharedWeather;
     private disk.modules.CSVCalendar sharedCsvCalendar;
     private disk.modules.CSVPeople sharedCsvPeople;
+    private disk.modules.CSVWeather sharedCsvWeather;
 
     /**
      * Create and wire shared data instances so both panels
@@ -152,10 +165,14 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
             sharedCsvCalendar = new disk.modules.CSVCalendar("calendar", sharedPeople);
             sharedCalendar = sharedCsvCalendar.load();
+            
+            sharedCsvWeather = new disk.modules.CSVWeather("calendar");
+            sharedWeather = sharedCsvWeather.load();
 
             // Inject shared instances
             calendarPanel1.setData(sharedCalendar, sharedPeople, sharedCsvCalendar, sharedCsvPeople);
             peoplePanel2.setData(sharedPeople, sharedCsvPeople);
+            weatherPanel1.setData(sharedWeather, sharedCsvWeather);
         }
         catch (Exception e) {
             // If anything fails, panels will use their own loaders
@@ -165,6 +182,46 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Open Weather CSV File");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files (*.csv)", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int userSelection = fileChooser.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToOpen = fileChooser.getSelectedFile();
+            try {
+                // For now, we only handle weather files.
+                System.out.println("Loading data from: " + fileToOpen.getAbsolutePath());
+                
+                // Use the new method in CSVWeather (to be added in Step 2)
+                modules.weather.Weather newWeatherData = sharedCsvWeather.loadFromFile(fileToOpen);
+                
+                // Update the main application's shared data
+                this.sharedWeather = newWeatherData;
+                
+                // Pass the updated data to the panel to refresh the table
+                weatherPanel1.setData(this.sharedWeather, this.sharedCsvWeather);
+                
+                System.out.println("Saving new data to default file...");
+                sharedCsvWeather.save(this.sharedWeather);
+                
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Weather file imported successfully.", 
+                    "Import Successful", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Error importing file: " + e.getMessage(), 
+                    "Import Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace(); // Useful for debugging
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -195,31 +252,25 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run(){
                 new CalendarMainForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private ui.GUI.CalendarPanel calendarPanel1;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private ui.GUI.PeoplePanel peoplePanel1;
     private ui.GUI.PeoplePanel peoplePanel2;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private ui.GUI.WeatherPanel weatherPanel1;
     // End of variables declaration//GEN-END:variables
 
 }
