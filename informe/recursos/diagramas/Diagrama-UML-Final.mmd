@@ -1,0 +1,308 @@
+classDiagram
+    %% Main Application Entry Point
+    class Main {
+        +main(String[] args)$
+    }
+
+    %% Core Business Logic Classes
+    class Calendar {
+        -List~Event~ events
+        +Calendar()
+        +getAllEvents() List~Event~
+        +add(Event event) boolean
+        +remove(Event event) Event
+        +searchByTitle(String keyword) List~Event~
+        +searchByDate(LocalDate date) List~Event~
+        +toString() String
+        -cmpEvents(Event e1, Event e2) int
+    }
+
+    class Event {
+        -String title
+        -LocalDate date
+        -LocalTime startTime
+        -LocalTime endTime
+        -boolean isAllDay
+        -String location
+        -String description
+        -Map~String, Person~ participants
+        -CalendarConfig config
+        +Event()
+        +getTitle() String
+        +getDate() LocalDate
+        +getStartTime() LocalTime
+        +getEndTime() LocalTime
+        +getIsAllDay() boolean
+        +getLocation() String
+        +getDescription() String
+        +setTitle(String title)
+        +setDate(LocalDate date)
+        +setStartTime(LocalTime startTime)
+        +setEndTime(LocalTime endTime)
+        +setIsAllDay(boolean isAllDay)
+        +setLocation(String location)
+        +setDescription(String description)
+        +addParticipant(Person person) boolean
+        +removeParticipant(String rut)
+        +getParticipants() Map~String, Person~
+        +fmtDate(String pattern) String
+        +fmtStartTime(String pattern) String
+        +fmtEndTime(String pattern) String
+        +toString() String
+    }
+
+    class People {
+        -Map~String, Person~ people
+        +People()
+        +getPeople() Map~String, Person~
+        +add(Person person)
+        +remove(String rut)
+        +get(String rut) Person
+        +contains(String rut) boolean
+        +isEmpty() boolean
+        +toString() String
+    }
+
+    class Person {
+        -String rut
+        -String name
+        -String email
+        -String phone
+        +Person()
+        +getRut() String
+        +getName() String
+        +getEmail() String
+        +getPhone() String
+        +setRut(String rut)
+        +setName(String name)
+        +setEmail(String email)
+        +setPhone(String phone)
+        +toString() String
+    }
+
+    class Weather {
+        -List~WeatherEntry~ entries
+        +Weather()
+        +add(WeatherEntry entry)
+        +getEntries() List~WeatherEntry~
+        +isEmpty() boolean
+        +getByDate(LocalDate date) WeatherEntry
+        +clear()
+        +toString() String
+    }
+
+    class WeatherEntry {
+        -LocalDate date
+        -String condition
+        -double minTemp
+        -double maxTemp
+        -double precipitation
+        -double windSpeed
+        +WeatherEntry()
+        +WeatherEntry(LocalDate, String, double, double, double, double)
+        +getDate() LocalDate
+        +getCondition() String
+        +getMinTemp() double
+        +getMaxTemp() double
+        +getPrecipitation() double
+        +getWindSpeed() double
+        +setDate(LocalDate date)
+        +setCondition(String condition)
+        +setMinTemp(double minTemp)
+        +setMaxTemp(double maxTemp)
+        +setPrecipitation(double precipitation)
+        +setWindSpeed(double windSpeed)
+    }
+
+    %% Configuration Classes
+    class Config {
+        -CalendarConfig calendar
+        -String path
+        +getCalendar() CalendarConfig
+        +load()$ Config
+    }
+
+    class CalendarConfig {
+        -String dateFormat
+        -String timeFormat
+        +getDateFormat() String
+        +getTimeFormat() String
+        +setDateFormat(String dateFormat)
+        +setTimeFormat(String timeFormat)
+        +setDateFormat()
+        +setTimeFormat()
+        +toString() String
+    }
+
+    %% UI Classes
+    class MainCLI {
+        +run(String[] args, Calendar calendar, People people)$
+    }
+
+    class MainGUI {
+        +run(Calendar calendar, People people)$
+    }
+
+    class MainTUI {
+        +run(Calendar calendar, People people)$
+    }
+
+    class CalendarMainForm {
+        +setVisible(boolean visible)
+    }
+
+    class CalendarPanel {
+        %% GUI Panel for calendar display
+    }
+
+    class EventDialog {
+        %% GUI Dialog for event creation/editing
+    }
+
+    class PeoplePanel {
+        %% GUI Panel for people management
+    }
+
+    class PersonDialog {
+        %% GUI Dialog for person creation/editing
+    }
+
+    class WeatherPanel {
+        %% GUI Panel for weather display
+    }
+
+    class WeatherCardPanel {
+        %% GUI Card component for weather
+    }
+
+    %% TUI Module Classes
+    class CalendarUI {
+        %% TUI interface for calendar operations
+    }
+
+    class PeopleUI {
+        %% TUI interface for people operations
+    }
+
+    %% File Management Classes
+    class FileManager~T~ {
+        <<abstract>>
+        -Path filePath
+        +FileManager(String appName, String fileName, FileType fileType)
+        +getFilePath() Path
+        +save(T data)*
+        +load()* T
+        -getDefaultPath(String, String, FileType) Path
+        -createFileIfNotExists()
+    }
+
+    class CSVCalendar {
+        %% CSV implementation for calendar data
+    }
+
+    class CSVPeople {
+        %% CSV implementation for people data
+    }
+
+    class CSVWeather {
+        %% CSV implementation for weather data
+    }
+
+    %% Exception Classes
+    class EventException {
+        +EventException(String message)
+    }
+
+    class InvalidDateException {
+        +InvalidDateException(String message)
+    }
+
+    class InvalidTimeException {
+        +InvalidTimeException(String message)
+    }
+
+    class InvalidTitleException {
+        +InvalidTitleException(String message)
+    }
+
+    class InvalidParticipantException {
+        +InvalidParticipantException(String message)
+    }
+
+    class PersonException {
+        +PersonException(String message)
+    }
+
+    class InvalidRutException {
+        +InvalidRutException(String message)
+    }
+
+    class InvalidNameException {
+        +InvalidNameException(String message)
+    }
+
+    class InvalidEmailException {
+        +InvalidEmailException(String message)
+    }
+
+    %% Utility Classes
+    class Report {
+        +generate(People people, Calendar calendar)$
+    }
+
+    %% Relationships
+    Main --> MainCLI : uses
+    Main --> Calendar : creates
+    Main --> People : creates
+
+    MainCLI --> MainGUI : delegates to
+    MainCLI --> MainTUI : delegates to
+
+    Calendar --> Event : contains
+    Event --> Person : has participants
+    Event --> CalendarConfig : uses
+
+    People --> Person : contains
+
+    Weather --> WeatherEntry : contains
+
+    Config --> CalendarConfig : contains
+
+    FileManager~T~ <|-- CSVCalendar : implements
+    FileManager~T~ <|-- CSVPeople : implements
+    FileManager~T~ <|-- CSVWeather : implements
+
+    EventException <|-- InvalidDateException : extends
+    EventException <|-- InvalidTimeException : extends
+    EventException <|-- InvalidTitleException : extends
+    EventException <|-- InvalidParticipantException : extends
+
+    PersonException <|-- InvalidRutException : extends
+    PersonException <|-- InvalidNameException : extends
+    PersonException <|-- InvalidEmailException : extends
+
+    Report --> Calendar : uses
+    Report --> People : uses
+    Report --> Event : uses
+    Report --> Person : uses
+
+    MainGUI --> CalendarMainForm : creates
+    CalendarMainForm --> CalendarPanel : contains
+    CalendarMainForm --> PeoplePanel : contains
+    CalendarMainForm --> WeatherPanel : contains
+    CalendarMainForm --> EventDialog : uses
+    CalendarMainForm --> PersonDialog : uses
+    CalendarMainForm --> WeatherCardPanel : uses
+
+    MainTUI --> CalendarUI : uses
+    MainTUI --> PeopleUI : uses
+
+    %% Exception Usage Relationships
+    Event ..> InvalidDateException : throws
+    Event ..> InvalidTimeException : throws
+    Event ..> InvalidTitleException : throws
+    Event ..> InvalidParticipantException : throws
+
+    Person ..> InvalidRutException : throws
+    Person ..> InvalidNameException : throws
+    Person ..> InvalidEmailException : throws
