@@ -10,11 +10,11 @@ import java.time.LocalDate;
  */
 public class WeatherEntry {
     private LocalDate date;
-    private String condition; // ej. "Sunny", "Rain", "Cloudy"
+    private String condition;
     private double minTemp;
     private double maxTemp;
-    private double precipitation; // mm
-    private double windSpeed; // m/s
+    private double precipitation; 
+    private double windSpeed; 
 
     public WeatherEntry() {}
 
@@ -77,11 +77,5 @@ public class WeatherEntry {
     
     public void setWindSpeed(double windSpeed) { 
         this.windSpeed = windSpeed; 
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s - %s (min: %.1f, max: %.1f, prec: %.1f, wind: %.1f)",
-                date, condition, minTemp, maxTemp, precipitation, windSpeed);
     }
 }

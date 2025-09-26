@@ -18,69 +18,47 @@ import java.time.format.DateTimeFormatter;
  * @author Nicolas
  */
 public class WeatherPanel extends JPanel {
-    private JTable weatherTable;
-    private DefaultTableModel tableModel;
-
-    // Estos objetos ahora serán "inyectados" desde CalendarMainForm
     private Weather weather;
     private CSVWeather csvWeather;
+    private JPanel cardsContainer;
 
     public WeatherPanel() {
         super(new BorderLayout());
+        
+        cardsContainer = new JPanel(new GridLayout(0, 3, 10, 10));
+        cardsContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Inicializar componentes de la UI
-        String[] columnNames = {"Fecha", "Condición", "Mínima (°C)", "Máxima (°C)", "Precipitación (mm)", "Viento (km/h)"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-        weatherTable = new JTable(tableModel);
-
-        add(new JScrollPane(weatherTable), BorderLayout.CENTER);
+        add(new JScrollPane(cardsContainer), BorderLayout.CENTER);
     }
-
-    /**
-     * NUEVO MÉTODO: Inyecta los datos compartidos desde CalendarMainForm.
-     * Este es el método clave que faltaba.
-     */
+    
     public void setData(Weather weather, CSVWeather csvWeather) {
         this.weather = weather;
         this.csvWeather = csvWeather;
-        // Una vez que tenemos los datos, cargamos la tabla.
         cargarDatos();
     }
 
-    /**
-     * El método cargarDatos ahora usa la variable de clase 'weather'.
-     */
     private void cargarDatos() {
-        if (weather == null) {
-            return; // No hacer nada si los datos no han sido inyectados
-        }
-        tableModel.setRowCount(0); // Limpiar tabla
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (weather == null) return;
 
-        for (WeatherEntry e : weather.getEntries()) {
-            tableModel.addRow(new Object[]{
-                    e.getDate() == null ? "" : e.getDate().format(fmt),
-                    e.getCondition(),
-                    e.getMinTemp(),
-                    e.getMaxTemp(),
-                    e.getPrecipitation(),
-                    e.getWindSpeed()
-            });
+        cardsContainer.removeAll();
+
+        for (WeatherEntry entry : weather.getEntries()) {
+            WeatherCardPanel card = new WeatherCardPanel(entry);
+            cardsContainer.add(card);
         }
+
+        cardsContainer.revalidate();
+        cardsContainer.repaint();
     }
 
-    /**
-     * NUEVO MÉTODO: Permite que CalendarMainForm guarde los datos del clima.
-     * Este era el otro método que faltaba.
-     */
     public void saveWeather() {
         try {
             if (csvWeather != null && weather != null) {
                 csvWeather.save(weather);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error guardando los datos del clima: " + e.getMessage(),
-                    "Error de Guardado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error saving weather data: " + e.getMessage(),
+                    "Save Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

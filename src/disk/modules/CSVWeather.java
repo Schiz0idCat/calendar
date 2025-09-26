@@ -17,7 +17,10 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ *
+ * @author Nicolas
+ */
 public class CSVWeather extends FileManager<Weather> {
     private static final String[] CSV_HEADERS = {"date", "condition", "minTemp", "maxTemp", "precipitation", "windSpeed"};
 
@@ -119,7 +122,6 @@ public class CSVWeather extends FileManager<Weather> {
                     
                     weather.add(e);
                 } catch (Exception ex) {
-                    // Make sure error messages are also in English
                     System.err.println("Skipping invalid weather record: " + ex.getMessage());
                 }
             }
@@ -135,7 +137,7 @@ public class CSVWeather extends FileManager<Weather> {
             if (s == null || s.trim().isEmpty()) return 0.0;
             return Double.parseDouble(s.trim());
         } catch (NumberFormatException nfe) {
-            System.err.println("Advertencia: Número inválido en columna " + column + ". Valor no pudo ser leído.");
+            System.err.println("Warning: Invalid number in column " + column + ". Value could not be read.");
             return 0.0;
         }
     }
