@@ -32,6 +32,7 @@ public class CalendarMainForm extends javax.swing.JFrame {
         calendarPanel1 = new ui.GUI.CalendarPanel();
         peoplePanel1 = new ui.GUI.PeoplePanel();
         peoplePanel2 = new ui.GUI.PeoplePanel();
+        weatherPanel1 = new ui.GUI.WeatherPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -49,6 +50,8 @@ public class CalendarMainForm extends javax.swing.JFrame {
         peoplePanel1.add(peoplePanel2, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("People", peoplePanel1);
+        
+        jTabbedPane1.addTab("Weather", weatherPanel1);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -67,6 +70,9 @@ public class CalendarMainForm extends javax.swing.JFrame {
                     }
                     if (peoplePanel2 != null) {
                         peoplePanel2.savePeople();
+                    }
+                    if (weatherPanel1 != null) {
+                        weatherPanel1.saveWeather();
                     }
                     javax.swing.JOptionPane.showMessageDialog(CalendarMainForm.this, "Datos guardados correctamente.");
                 } catch (Exception e) {
@@ -135,8 +141,10 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
     private modules.calendar.Calendar sharedCalendar;
     private modules.people.People sharedPeople;
+    private modules.weather.Weather sharedWeather;
     private disk.modules.CSVCalendar sharedCsvCalendar;
     private disk.modules.CSVPeople sharedCsvPeople;
+    private disk.modules.CSVWeather sharedCsvWeather;
 
     /**
      * Create and wire shared data instances so both panels
@@ -149,10 +157,14 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
             sharedCsvCalendar = new disk.modules.CSVCalendar("calendar", sharedPeople);
             sharedCalendar = sharedCsvCalendar.load();
+            
+            sharedCsvWeather = new disk.modules.CSVWeather("calendar");
+            sharedWeather = sharedCsvWeather.load();
 
             // Inject shared instances
             calendarPanel1.setData(sharedCalendar, sharedPeople, sharedCsvCalendar, sharedCsvPeople);
             peoplePanel2.setData(sharedPeople, sharedCsvPeople);
+            weatherPanel1.setData(sharedWeather, sharedCsvWeather);
         }
         catch (Exception e) {
             // If anything fails, panels will use their own loaders
@@ -192,7 +204,7 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run(){
                 new CalendarMainForm().setVisible(true);
             }
         });
@@ -210,6 +222,7 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private ui.GUI.PeoplePanel peoplePanel1;
     private ui.GUI.PeoplePanel peoplePanel2;
     private javax.swing.JMenuItem saveMenuItem;
+    private ui.GUI.WeatherPanel weatherPanel1;
     // End of variables declaration//GEN-END:variables
 
 }
