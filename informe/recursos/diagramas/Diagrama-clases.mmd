@@ -1,23 +1,86 @@
-flowchart TD
-    A[Start Application] --> B[Initialize Calendar & People]
-    B --> C[Display Main Menu]
-
-    C -->|Calendar| D[Calendar Menu]
-    C -->|People| E[People Menu]
-    C -->|Exit| F[End Application]
-
-    %% Calendar options
-    D -->|List Events| G[Show Events]
-    D -->|Search Events| H[Search by Title or Date]
-    D -->|Add Event| I[Enter Event Details]
-    D -->|Modify Event| J[Update Event]
-    D -->|Remove Event| K[Delete Event]
-    D -->|Back| C
-
-    %% People options
-    E -->|List People| L[Show People]
-    E -->|Search Person| M[Search by RUT]
-    E -->|Add Person| N[Enter Person Details]
-    E -->|Modify Person| O[Update Person]
-    E -->|Remove Person| P[Delete Person]
-    E -->|Back| C
+---
+config:
+  theme: default
+---
+classDiagram
+    subgraph Calendar Domain
+        Calendar "1" *-- "0..*" Event : contains
+        Event "0..*" o-- "0..*" Person : has participants
+    end
+    subgraph People Domain
+        People "1" *-- "0..*" Person : contains
+    end
+    subgraph Weather Domain
+        Weather "1" *-- "0..*" WeatherEntry : contains
+    end
+    class Calendar {
+        -List~Event~ events
+        +add(Event event) boolean
+        +remove(Event event) Event
+        +getAllEvents() List~Event~
+    }
+    class Event {
+        -String title
+        -LocalDate date
+        -Map~String, Person~ participants
+        +addParticipant(Person person)
+        +getParticipants() Map~String, Person~
+    }
+    class People {
+        -Map~String, Person~ people
+        +add(Person person)
+        +get(String rut) Person
+    }
+    class Person {
+        -String rut
+        -String name
+        -String email
+    }
+    class Weather {
+        -List~WeatherEntry~ entries
+        +add(WeatherEntry entry)
+        +getEntries() List~WeatherEntry~
+    }
+    class WeatherEntry {
+        -LocalDate date
+        -String condition
+        -double minTemp
+        -double maxTemp
+    }
+    subgraph Persistence Layer
+        FileManager~T~ <|-- CSVCalendar
+        FileManager~T~ <|-- CSVPeople
+        FileManager~T~ <|-- CSVWeather
+    end
+    class FileManager~T~ {
+        <<Abstract>>
+        #Path filePath
+        +save(T data) void
+        +load() T
+    }
+    class CSVCalendar {
+        +save(Calendar data) void
+        +load() Calendar
+    }
+    class CSVPeople {
+        +save(People data) void
+        +load() People
+    }
+    class CSVWeather {
+        +save(Weather data) void
+        +load() Weather
+    }
+    subgraph Configuration
+        class Config {
+           +getCalendar() CalendarConfig
+        }
+        class CalendarConfig {
+           -String dateFormat
+           -String timeFormat
+        }
+    end
+    CSVCalendar ..> Calendar : manages
+    CSVPeople ..> People : manages
+    CSVWeather ..> Weather : manages
+    Event ..> CalendarConfig : uses
+    Config ..> CalendarConfig : provides
