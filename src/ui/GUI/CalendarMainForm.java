@@ -4,10 +4,13 @@
  */
 package ui.GUI;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Felipe Márquez
+ * @author Felipe Márquez, Nicolas Leiva
  */
 public class CalendarMainForm extends javax.swing.JFrame {
 
@@ -58,6 +61,11 @@ public class CalendarMainForm extends javax.swing.JFrame {
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
@@ -174,6 +182,43 @@ public class CalendarMainForm extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Open Weather CSV File");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files (*.csv)", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int userSelection = fileChooser.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToOpen = fileChooser.getSelectedFile();
+            try {
+                // For now, we only handle weather files.
+                System.out.println("Loading data from: " + fileToOpen.getAbsolutePath());
+                
+                // Use the new method in CSVWeather (to be added in Step 2)
+                modules.weather.Weather newWeatherData = sharedCsvWeather.loadFromFile(fileToOpen);
+                
+                // Update the main application's shared data
+                this.sharedWeather = newWeatherData;
+                
+                // Pass the updated data to the panel to refresh the table
+                weatherPanel1.setData(this.sharedWeather, this.sharedCsvWeather);
+                
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Weather file imported successfully.", 
+                    "Import Successful", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Error importing file: " + e.getMessage(), 
+                    "Import Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace(); // Useful for debugging
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments

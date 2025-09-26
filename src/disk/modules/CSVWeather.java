@@ -95,6 +95,38 @@ public class CSVWeather extends FileManager<Weather> {
         }
         return weather;
     }
+    
+    public Weather loadFromFile(java.io.File file) throws java.io.IOException {
+        Weather weather = new Weather();
+        
+        try (java.io.Reader reader = java.nio.file.Files.newBufferedReader(file.toPath());
+             org.apache.commons.csv.CSVParser csvParser = new org.apache.commons.csv.CSVParser(reader, READ_FORMAT)) {
+
+            for (org.apache.commons.csv.CSVRecord record : csvParser) {
+                try {
+                    WeatherEntry e = new WeatherEntry();
+                    
+                    String dateStr = record.isMapped("date") ? record.get("date") : "";
+                    if (dateStr != null && !dateStr.isEmpty()) {
+                        e.setDate(java.time.LocalDate.parse(dateStr, DATE_FORMATTER));
+                    }
+                    
+                    e.setCondition(record.get("condition"));
+                    e.setMinTemp(parseDoubleSafe(record, "minTemp"));
+                    e.setMaxTemp(parseDoubleSafe(record, "maxTemp"));
+                    e.setPrecipitation(parseDoubleSafe(record, "precipitation"));
+                    e.setWindSpeed(parseDoubleSafe(record, "windSpeed"));
+                    
+                    weather.add(e);
+                } catch (Exception ex) {
+                    // Make sure error messages are also in English
+                    System.err.println("Skipping invalid weather record: " + ex.getMessage());
+                }
+            }
+        }
+        
+        return weather;
+    }
 
     private double parseDoubleSafe(CSVRecord record, String column) {
         try {
