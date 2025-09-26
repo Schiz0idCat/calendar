@@ -71,7 +71,7 @@ public class CSVWeather extends FileManager<Weather> {
         if (!Files.exists(this.getFilePath())) return weather;
         
         try (Reader reader = Files.newBufferedReader(this.getFilePath());
-             CSVParser csvParser = new CSVParser(reader, READ_FORMAT)) {
+             CSVParser csvParser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (CSVRecord record : csvParser) {
                 try {
@@ -103,7 +103,7 @@ public class CSVWeather extends FileManager<Weather> {
         Weather weather = new Weather();
         
         try (java.io.Reader reader = java.nio.file.Files.newBufferedReader(file.toPath());
-             org.apache.commons.csv.CSVParser csvParser = new org.apache.commons.csv.CSVParser(reader, READ_FORMAT)) {
+             CSVParser csvParser = CSVParser.parse(reader, READ_FORMAT)) {
 
             for (org.apache.commons.csv.CSVRecord record : csvParser) {
                 try {
