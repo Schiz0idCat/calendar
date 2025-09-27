@@ -116,7 +116,7 @@ On Windows vista or later : C:\Users\<Account>\AppData\<AppAuthor>\<AppName>
 On Unix/Linux : /home/<account>/.local/share/<AppName>
 ```
 
-Para más detalle revisar la dependencia usada [acá](https://github.com/harawata/appdirs).
+Para más detalle, revisar la dependencia usada [acá](https://github.com/harawata/appdirs).
 
 # Créditos
 Este proyecto fue realizado por:
