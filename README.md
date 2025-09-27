@@ -15,6 +15,7 @@ mientras que el calendario colecciona y gestiona dichos eventos.
 * [Uso](#Uso)
     * [Instrucciones](#Instrucciones)
         * [Ejemplos](#Ejemplos)
+        * [Datos de Muestra](#Datos-de-Muestra)
     * [Interfaz](#Interfaz)
         * [TUI](#TUI)
         * [GUI](#GUI)
@@ -88,6 +89,12 @@ java -jar target/calendar-1.5.0.jar gui
 # TUI
 java -jar target/calendar-1.5.0.jar tui
 ```
+
+### Datos de muestra
+Además, en [sample](./resources/sample/) hay datos de muestra que pueden ser copiados en los archivos locales del sistema
+para poder testear el programa.
+
+Para más información sobre dónde copiar los archivos, revisar el apartado [Manejo de Archivos](#Manejo-de-Archivos).
 
 ## Interfaz
 ### TUI
