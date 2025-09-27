@@ -1,0 +1,4 @@
+title,date,startTime,endTime,isAllDay,location,description,participants
+cumpleaños,12-02-2000,00:00,23:59,true,mi casita,,13.345.678-9;66.666.666-6;33.333.333-3;55.555.555-5
+reunión,27-09-2025,14:00,16:00,false,empresa,deadlines,33.333.333-3;44.444.444-4;55.555.555-5
+clases,29-09-2025,08:15,09:25,false,universidad,clases de programación,98.765.432-1
